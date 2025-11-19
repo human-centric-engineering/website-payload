@@ -6,6 +6,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Payload CMS website template built with Next.js 15, React 19, and PostgreSQL. It provides a full-featured headless CMS with an admin panel and a production-ready frontend, all served from a single Next.js application using the App Router.
 
+## Substrate Documentation
+
+**Comprehensive technical documentation is available in `.context/`** for AI-assisted development.
+
+**Start here:** `.context/substrate.md` - Entry point with navigation to all domains
+
+**Documentation domains:**
+- **Architecture** - System design, request flows, dependency injection patterns
+- **Authentication** - JWT auth, security model, integration patterns
+- **API** - Complete REST/GraphQL reference with client examples
+- **Database** - PostgreSQL schema, TypeScript models, migration workflow
+- **Guidelines** - Development workflow, testing strategies, deployment
+
+**When to use:**
+- Implementing new features (review relevant architecture patterns)
+- Debugging issues (check flow diagrams and error handling patterns)
+- Understanding data models (see database schema and relationships)
+- API integration (reference endpoints and client examples)
+- Security concerns (review threat model and mitigations)
+
+This CLAUDE.md provides quick reference; `.context/` provides deep technical context.
+
 ## Development Commands
 
 ### Core Development
