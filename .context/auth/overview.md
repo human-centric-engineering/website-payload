@@ -88,7 +88,8 @@ sequenceDiagram
     Browser->>API: POST /api/users/logout<br/>Cookie: payload-token=...
     API->>Payload: payload.logout()
     Payload-->>API: Success
-    API-->>Browser: Set-Cookie: payload-token=; Max-Age=0<br/>HTTP 200
+    API-->>Browser: Set-Cookie: payload-token=#59; Max-Age=0<br/>HTTP 200
+%% Note the above should read "payload-token=;" but the semi-colon breaks the mermaid engine in GitHub
     Browser->>Browser: Clear local user state
     Browser-->>User: Redirect to /admin/login
 ```
