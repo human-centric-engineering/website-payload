@@ -24,8 +24,8 @@ graph TB
 
     subgraph "Next.js Application (Port 3000)"
         subgraph "Route Group: (frontend)"
-            Pages[Pages Router<br/>/[slug]]
-            Posts[Posts Router<br/>/posts/[slug]]
+            Pages[Pages Router<br/>/slug]
+            Posts[Posts Router<br/>/posts/slug]
             Search[Search<br/>/search]
             Preview[Draft Preview<br/>/next/preview]
         end
