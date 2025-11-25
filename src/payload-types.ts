@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    projects: Project;
+    network: Network;
     media: Media;
     categories: Category;
     users: User;
@@ -91,6 +93,8 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    network: NetworkSelect<false> | NetworkSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -780,6 +784,132 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  projectType: 'venture' | 'agency';
+  projectStatus: 'active' | 'completed' | 'in-development';
+  heroImage: number | Media;
+  /**
+   * Brief project description for listing pages
+   */
+  excerpt: string;
+  /**
+   * Full project description
+   */
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Technologies and tools used
+   */
+  technologies?:
+    | {
+        tech?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  links?: {
+    /**
+     * Live website URL
+     */
+    website?: string | null;
+    /**
+     * Case study or blog post URL
+     */
+    caseStudy?: string | null;
+    /**
+     * GitHub or repository URL (if applicable)
+     */
+    repository?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "network".
+ */
+export interface Network {
+  id: number;
+  name: string;
+  /**
+   * Job title or role in the network
+   */
+  role: string;
+  profileImage: number | Media;
+  /**
+   * Short biography
+   */
+  bio: string;
+  /**
+   * Key skills and expertise areas
+   */
+  skills?:
+    | {
+        skill?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?: {
+    /**
+     * LinkedIn profile URL
+     */
+    linkedin?: string | null;
+    /**
+     * Twitter/X profile URL
+     */
+    twitter?: string | null;
+    /**
+     * GitHub profile URL
+     */
+    github?: string | null;
+    /**
+     * Personal website URL
+     */
+    website?: string | null;
+  };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -975,6 +1105,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'network';
+        value: number | Network;
       } | null)
     | ({
         relationTo: 'media';
@@ -1212,6 +1350,74 @@ export interface PostsSelect<T extends boolean = true> {
       };
   generateSlug?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  projectType?: T;
+  projectStatus?: T;
+  heroImage?: T;
+  excerpt?: T;
+  description?: T;
+  technologies?:
+    | T
+    | {
+        tech?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        website?: T;
+        caseStudy?: T;
+        repository?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "network_select".
+ */
+export interface NetworkSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  profileImage?: T;
+  bio?: T;
+  skills?:
+    | T
+    | {
+        skill?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        linkedin?: T;
+        twitter?: T;
+        github?: T;
+        website?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

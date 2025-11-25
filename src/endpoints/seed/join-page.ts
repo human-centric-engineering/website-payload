@@ -1,15 +1,15 @@
+import type { RequiredDataFromCollectionSlug } from 'payload'
 import type { Form } from '@/payload-types'
-import { RequiredDataFromCollectionSlug } from 'payload'
 
-type ContactArgs = {
-  contactForm: Form
+type JoinArgs = {
+  joinForm: Form
 }
 
-export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
-  contactForm,
+export const joinPage: (args: JoinArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
+  joinForm,
 }) => {
   return {
-    slug: 'contact',
+    slug: 'join',
     _status: 'published',
     hero: {
       type: 'lowImpact',
@@ -27,7 +27,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Get in Touch',
+                  text: 'Join the Network',
                   version: 1,
                 },
               ],
@@ -46,7 +46,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Have a project in mind? Let\'s talk about how we can help.',
+                  text: 'Be part of building the future of entrepreneurship',
                   version: 1,
                 },
               ],
@@ -83,7 +83,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Work With Us',
+                        text: 'Building a Network of Innovators',
                         version: 1,
                       },
                     ],
@@ -102,7 +102,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Whether you have a fully-formed idea or a conceptual vision, we\'d love to hear from you. We specialise in turning ambitious ideas into reality, blending the speed and power of AI with decades of engineering expertise.',
+                        text: 'A key part of our vision is to build the studio as a network of people who share the vision and can collaborate and contribute to building the studio, the platform, and the ventures.',
                         version: 1,
                       },
                     ],
@@ -121,7 +121,7 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Tell us about your project and we\'ll get back to you shortly.',
+                        text: 'We\'re looking for builders, strategists, marketers, designers, engineers, and other specialists who are excited about redefining entrepreneurship in the AI age.',
                         version: 1,
                       },
                     ],
@@ -143,17 +143,17 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
         ],
       },
       {
-        blockName: 'Contact Form',
+        blockName: 'Join Form',
         blockType: 'formBlock',
         enableIntro: false,
-        form: contactForm,
+        form: joinForm.id,
       },
     ],
     meta: {
       description:
-        'Get in touch with HCE Venture Studio. We specialise in turning half-formed ideas into reality, blending AI tooling with engineering craftsmanship.',
-      title: 'Contact Us | HCE Venture Studio',
+        'Join the HCE Venture Studio network. Collaborate with innovators, strategists, and builders to create the next generation of AI-powered ventures.',
+      title: 'Join the Network | HCE Venture Studio',
     },
-    title: 'Contact',
+    title: 'Join Us',
   }
 }

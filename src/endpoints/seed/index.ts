@@ -2,19 +2,27 @@ import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from '
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
+import { joinForm as joinFormData } from './join-form'
 import { home } from './home'
+import { aboutPage } from './about-page'
+import { joinPage } from './join-page'
+import { whitepaperPage } from './whitepaper-page'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { ventureProject1, agencyProject1, agencyProject2 } from './project-seed-data'
+import { networkMember1, networkMember2, networkMember3 } from './network-seed-data'
 
 const collections: CollectionSlug[] = [
   'categories',
   'media',
   'pages',
   'posts',
+  'projects',
+  'network',
   'forms',
   'form-submissions',
   'search',
@@ -192,17 +200,24 @@ export const seed = async ({
     },
   })
 
-  payload.logger.info(`— Seeding contact form...`)
+  payload.logger.info(`— Seeding forms...`)
 
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: contactFormData,
-  })
+  const [contactForm, joinForm] = await Promise.all([
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: contactFormData,
+    }),
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: joinFormData,
+    }),
+  ])
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
+  const [_homePage, _aboutPageDoc, contactPage, _joinPageDoc, _whitepaperPageDoc] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
@@ -211,7 +226,80 @@ export const seed = async ({
     payload.create({
       collection: 'pages',
       depth: 0,
+      data: aboutPage({ heroImage: imageHomeDoc }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
       data: contactPageData({ contactForm: contactForm }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: joinPage({ joinForm: joinForm }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: whitepaperPage({ heroImage: imageHomeDoc }),
+    }),
+  ])
+
+  payload.logger.info(`— Seeding projects...`)
+
+  await Promise.all([
+    payload.create({
+      collection: 'projects',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: ventureProject1({ heroImageID: imageHomeDoc.id }),
+    }),
+    payload.create({
+      collection: 'projects',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: agencyProject1({ heroImageID: image1Doc.id }),
+    }),
+    payload.create({
+      collection: 'projects',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: agencyProject2({ heroImageID: image2Doc.id }),
+    }),
+  ])
+
+  payload.logger.info(`— Seeding network...`)
+
+  await Promise.all([
+    payload.create({
+      collection: 'network',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: networkMember1({ profileImageID: image1Doc.id }),
+    }),
+    payload.create({
+      collection: 'network',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: networkMember2({ profileImageID: image2Doc.id }),
+    }),
+    payload.create({
+      collection: 'network',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: networkMember3({ profileImageID: image3Doc.id }),
     }),
   ])
 
@@ -225,8 +313,29 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Posts',
-              url: '/posts',
+              label: 'About',
+              url: '/about',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Projects',
+              url: '/projects',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Whitepaper',
+              url: '/whitepaper',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Network',
+              url: '/network',
             },
           },
           {
@@ -249,24 +358,29 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Admin',
-              url: '/admin',
+              label: 'About',
+              url: '/about',
             },
           },
           {
             link: {
               type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
+              label: 'Projects',
+              url: '/projects',
             },
           },
           {
             link: {
               type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
+              label: 'Whitepaper',
+              url: '/whitepaper',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Join Us',
+              url: '/join',
             },
           },
         ],

@@ -1,6 +1,6 @@
 import { RequiredDataFromCollectionSlug } from 'payload'
 
-export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
+export const joinForm: RequiredDataFromCollectionSlug<'forms'> = {
   confirmationMessage: {
     root: {
       type: 'root',
@@ -14,7 +14,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
               format: 0,
               mode: 'normal',
               style: '',
-              text: 'Thank you for getting in touch!',
+              text: 'Thank you for your interest!',
               version: 1,
             },
           ],
@@ -33,7 +33,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
               format: 0,
               mode: 'normal',
               style: '',
-              text: 'We\'ve received your enquiry and will get back to you shortly to discuss your project.',
+              text: 'We\'ve received your application to join the HCE network. We\'ll review your submission and get back to you soon.',
               version: 1,
             },
           ],
@@ -51,7 +51,6 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
   },
   confirmationType: 'message',
-  createdAt: '2025-01-25T12:00:00.000Z',
   emails: [
     {
       emailFrom: '"HCE Venture Studio" <noreply@humancentricengineering.com>',
@@ -69,7 +68,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Thank you for your enquiry. We\'ve received your message and will review your project details shortly.',
+                  text: 'Thank you for your interest in joining the HCE Venture Studio network. We\'ve received your application and will review it shortly.',
                   version: 1,
                 },
               ],
@@ -88,7 +87,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'We\'ll be in touch soon to discuss how we can help bring your vision to life.',
+                  text: 'We\'re excited about the possibility of collaborating with you.',
                   version: 1,
                 },
               ],
@@ -105,7 +104,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
           version: 1,
         },
       },
-      subject: 'Thank you for your enquiry - HCE Venture Studio',
+      subject: 'Thank you for your interest in HCE Venture Studio',
     },
   ],
   fields: [
@@ -115,7 +114,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       blockType: 'text',
       label: 'Name',
       required: true,
-      width: 50,
+      width: 100,
     },
     {
       name: 'email',
@@ -123,35 +122,28 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       blockType: 'email',
       label: 'Email',
       required: true,
-      width: 50,
+      width: 100,
     },
     {
-      name: 'company',
-      blockName: 'company',
-      blockType: 'text',
-      label: 'Company',
-      required: false,
-      width: 50,
-    },
-    {
-      name: 'phone',
-      blockName: 'phone',
-      blockType: 'text',
-      label: 'Phone',
-      required: false,
-      width: 50,
-    },
-    {
-      name: 'project-description',
-      blockName: 'project-description',
+      name: 'why-join',
+      blockName: 'why-join',
       blockType: 'textarea',
-      label: 'Tell us about your project',
+      label: 'Why you\'d like to join',
+      required: true,
+      width: 100,
+    },
+    {
+      name: 'what-you-bring',
+      blockName: 'what-you-bring',
+      blockType: 'textarea',
+      label: 'What you bring with you (skills, experience, etc.)',
       required: true,
       width: 100,
     },
   ],
   redirect: undefined,
-  submitButtonLabel: 'Send Enquiry',
-  title: 'Client Enquiry Form',
+  submitButtonLabel: 'Submit Application',
+  title: 'Join the Network',
   updatedAt: '2025-01-25T12:00:00.000Z',
+  createdAt: '2025-01-25T12:00:00.000Z',
 }
