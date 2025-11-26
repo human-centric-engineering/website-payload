@@ -14,7 +14,7 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
 
   return (
-    <footer className="mt-auto border-t border-border/40 bg-card/30 backdrop-blur">
+    <footer className="mt-auto border-t border-border/40 bg-[hsl(0_0%_16%)]" data-theme="dark">
       <div className="container py-12">
         <div className="flex flex-col md:flex-row md:justify-between gap-8">
           <div className="flex flex-col gap-4">
@@ -39,8 +39,10 @@ export async function Footer() {
               })}
             </nav>
             <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground/60">Theme</span>
-              <ThemeSelector />
+              <span className="text-sm font-medium text-white/60">Theme</span>
+              <div className="text-white [&_button]:text-white [&_svg]:text-white/50">
+                <ThemeSelector />
+              </div>
             </div>
           </div>
         </div>
