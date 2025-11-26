@@ -37,13 +37,5 @@ A key part of the vision is to build the studio as a network of people who a) sh
 ## Purpose of the website
 The site should establish the idea of the HCE Studio, invite people to contact if they're interested in joining, have a place to demonstrate some of our latest projects. We also want to show that we are open to custom projects and dev work. We have a draft of a whitepaper in Google Docs; it would be good to have a verstion of it up there.
 
-## Resources
-Colours:
-
-- Black
-- White
-- Orange: rgb(235, 86, 0)
-- Dark grey: rgb(40, 40, 40)
-- Light grey: rgb(218, 217, 217)
-
-We can also have shades and tones of these.
+## Look and feel
+Refer to [design-language.md](design-language.md) for our visual approach and style guidelines.
