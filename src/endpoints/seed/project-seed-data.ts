@@ -55,6 +55,7 @@ export const ventureProject1: (
             children: [
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -64,6 +65,7 @@ export const ventureProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -73,6 +75,7 @@ export const ventureProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -82,6 +85,7 @@ export const ventureProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -91,6 +95,7 @@ export const ventureProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -217,6 +222,7 @@ export const agencyProject1: (
             children: [
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -226,6 +232,7 @@ export const agencyProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -235,6 +242,7 @@ export const agencyProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -244,6 +252,7 @@ export const agencyProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -253,6 +262,7 @@ export const agencyProject1: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -360,6 +370,7 @@ export const agencyProject2: (
             children: [
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -369,6 +380,7 @@ export const agencyProject2: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -378,6 +390,7 @@ export const agencyProject2: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -387,6 +400,7 @@ export const agencyProject2: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',
@@ -396,6 +410,7 @@ export const agencyProject2: (
               },
               {
                 type: 'listitem',
+                indent: 0,
                 children: [
                   {
                     type: 'text',

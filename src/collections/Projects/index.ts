@@ -13,6 +13,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
+import { FixedToolbarFeature, InlineToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Projects: CollectionConfig<'projects'> = {
   slug: 'projects',
@@ -121,6 +122,15 @@ export const Projects: CollectionConfig<'projects'> = {
               name: 'description',
               type: 'richText',
               required: true,
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                  ]
+                },
+              }),
               admin: {
                 description: 'Full project description',
               },
