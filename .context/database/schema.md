@@ -42,6 +42,37 @@ erDiagram
         timestamp created_at
     }
 
+    PROJECTS ||--o{ PROJECTS_VERSIONS : has
+    PROJECTS ||--o{ PROJECTS_RELS : has
+    PROJECTS {
+        int id PK
+        varchar title
+        varchar slug UK
+        enum _status
+        enum project_type
+        enum project_status
+        jsonb description
+        varchar excerpt
+        jsonb technologies
+        jsonb links
+        jsonb meta
+        timestamp published_at
+        timestamp updated_at
+        timestamp created_at
+    }
+
+    NETWORK {
+        int id PK
+        varchar name
+        enum role
+        text bio
+        jsonb skills
+        boolean featured
+        jsonb links
+        timestamp updated_at
+        timestamp created_at
+    }
+
     MEDIA {
         int id PK
         varchar alt
@@ -85,6 +116,8 @@ erDiagram
     POSTS_RELS }o--|| CATEGORIES : references
     POSTS_RELS }o--|| USERS : references
     POSTS_RELS }o--|| POSTS : references
+    PROJECTS_RELS }o--|| MEDIA : references
+    NETWORK }o--|| MEDIA : photo
 
     HEADER {
         int id PK
@@ -200,6 +233,75 @@ CREATE INDEX idx_pages_published_at ON pages(published_at);
 CREATE INDEX idx_posts_slug ON posts(slug);
 CREATE INDEX idx_posts_status ON posts(_status);
 CREATE INDEX idx_posts_published_at ON posts(published_at DESC);
+```
+
+---
+
+### Projects Collection
+
+**Table**: `projects`
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| `id` | SERIAL | PRIMARY KEY | Auto-incrementing ID |
+| `title` | VARCHAR(255) | NOT NULL | Project title |
+| `slug` | VARCHAR(255) | UNIQUE, NOT NULL | URL-friendly slug |
+| `_status` | ENUM('draft', 'published') | DEFAULT 'draft' | Publication status |
+| `project_type` | ENUM('venture', 'agency') | NOT NULL | Project category |
+| `project_status` | ENUM('active', 'completed', 'in-development') | NOT NULL | Current status |
+| `excerpt` | TEXT | NOT NULL | Brief description |
+| `description` | JSONB | NOT NULL | Rich text content (Lexical JSON) |
+| `technologies` | JSONB | | Technologies array |
+| `links` | JSONB | | External links (website, caseStudy, repository) |
+| `meta` | JSONB | | SEO metadata |
+| `published_at` | TIMESTAMP | | Publication timestamp |
+| `updated_at` | TIMESTAMP | NOT NULL | Last update timestamp |
+| `created_at` | TIMESTAMP | NOT NULL | Creation timestamp |
+
+**Relationships** (via `projects_rels` table):
+- `heroImage` → `media` (many-to-one)
+- `meta.image` → `media` (many-to-one)
+
+**Indexes**:
+```sql
+CREATE INDEX idx_projects_slug ON projects(slug);
+CREATE INDEX idx_projects_status ON projects(_status);
+CREATE INDEX idx_projects_type ON projects(project_type);
+CREATE INDEX idx_projects_published_at ON projects(published_at DESC);
+```
+
+**Important Notes**:
+- Field renamed from `status` to `project_status` to avoid enum conflict with `_status`
+- Description uses Lexical editor with toolbar features (FixedToolbarFeature, InlineToolbarFeature)
+- All listitem nodes in description JSON must include `indent: 0`
+
+---
+
+### Network Collection
+
+**Table**: `network`
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| `id` | SERIAL | PRIMARY KEY | Auto-incrementing ID |
+| `name` | VARCHAR(255) | NOT NULL | Member name |
+| `role` | ENUM('designer', 'developer', 'strategist', 'marketer', 'other') | NOT NULL | Primary role |
+| `bio` | TEXT | | Member biography |
+| `photo_id` | INTEGER | FOREIGN KEY | Profile photo (references media) |
+| `skills` | JSONB | | Skills array |
+| `featured` | BOOLEAN | DEFAULT false | Show on homepage |
+| `links` | JSONB | | Social links (linkedIn, github, website) |
+| `updated_at` | TIMESTAMP | NOT NULL | Last update timestamp |
+| `created_at` | TIMESTAMP | NOT NULL | Creation timestamp |
+
+**Relationships**:
+- `photo` → `media` (many-to-one, direct foreign key)
+
+**Indexes**:
+```sql
+CREATE INDEX idx_network_role ON network(role);
+CREATE INDEX idx_network_featured ON network(featured);
+CREATE INDEX idx_network_photo ON network(photo_id);
 ```
 
 ---
@@ -327,6 +429,20 @@ CREATE UNIQUE INDEX idx_users_email ON users(email);
 
 ---
 
+### Projects Relationships (`projects_rels`)
+
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | SERIAL | Primary key |
+| `parent_id` | INTEGER | Projects document ID |
+| `path` | VARCHAR(255) | Relationship field path |
+| `order` | INTEGER | Order in array relationships |
+| `media_id` | INTEGER | Foreign key to media |
+
+**Purpose**: Stores relationships between projects and media (heroImage, meta.image).
+
+---
+
 ## Versioning Tables
 
 ### Pages Versions (`pages_versions`)
@@ -345,6 +461,14 @@ CREATE UNIQUE INDEX idx_users_email ON users(email);
 **Purpose**: Stores draft versions and revision history.
 
 **Version Limit**: Maximum 50 versions per document (configurable).
+
+---
+
+### Projects Versions (`projects_versions`)
+
+Similar structure to `pages_versions`. Stores draft versions and revision history for projects.
+
+**Version Limit**: Maximum 50 versions per document.
 
 ---
 
