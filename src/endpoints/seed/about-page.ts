@@ -12,8 +12,25 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
     slug: 'about',
     _status: 'published',
     hero: {
-      type: 'mediumImpact',
-      links: [],
+      type: 'highImpact',
+      links: [
+        {
+          link: {
+            type: 'custom',
+            appearance: 'default',
+            label: 'Join the Network',
+            url: '/join',
+          },
+        },
+        {
+          link: {
+            type: 'custom',
+            appearance: 'outline',
+            label: 'View Our Work',
+            url: '/projects',
+          },
+        },
+      ],
       media: heroImage.id,
       richText: {
         root: {
@@ -28,7 +45,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'About HCE Venture Studio',
+                  text: 'Building Tomorrow\'s Ventures, Today',
                   version: 1,
                 },
               ],
@@ -47,7 +64,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Building the future of entrepreneurship through human-centric innovation and AI-powered collaboration.',
+                  text: 'Where human ingenuity meets AI capability',
                   version: 1,
                 },
               ],
@@ -67,7 +84,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
     },
     layout: [
       {
-        blockName: 'What We Do',
+        blockName: 'Mission Statement',
         blockType: 'content',
         columns: [
           {
@@ -84,7 +101,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'What is the HCE Venture Studio?',
+                        text: 'Redefining How Ventures Are Built',
                         version: 1,
                       },
                     ],
@@ -103,26 +120,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'The Venture Studio acts as an innovation hub for identifying, prototyping, and launching digital-age ventures. Our goal is to harness AI and automation to reduce the time, cost, and friction between idea and market. Rather than focusing on a single product, the studio functions as a venture creation engine, continuously generating, testing, and deploying new business ideas.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Each project contributes to the studio\'s experience, knowledge, and IP collateral whilst also having the potential to become a standalone entity.',
+                        text: 'HCE Venture Studio is an innovation engine for the AI age. We harness cutting-edge technology and collaborative networks to rapidly prototype, test, and launch digital ventures—dramatically reducing the time, cost, and friction between idea and market. Rather than building a single product, we\'ve created a system that continuously generates and deploys new businesses, each with the potential to scale or spin out as an independent entity.',
                         version: 1,
                       },
                     ],
@@ -144,7 +142,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
         ],
       },
       {
-        blockName: 'Key Concepts',
+        blockName: 'The Future of Work',
         blockType: 'content',
         columns: [
           {
@@ -161,7 +159,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Two Key Concepts',
+                        text: 'The Future of Work',
                         version: 1,
                       },
                     ],
@@ -195,7 +193,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Entrepreneurship Redefined',
+                        text: 'The AI Revolution',
                         version: 1,
                       },
                     ],
@@ -214,7 +212,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Just as small creative teams transformed the media landscape by producing and distributing digital content at scale via platforms such as YouTube, small entrepreneurial teams are beginning to use AI to build, launch, and scale ventures with similar frequency and distribution reach.',
+                        text: 'Just as YouTube empowered small creative teams to build media empires, AI is now enabling small entrepreneurial teams to build and scale ventures at unprecedented speed. What once required entire corporations can now be achieved by nimble teams equipped with advanced tools, fundamentally changing who can be an entrepreneur and how ventures are created.',
                         version: 1,
                       },
                     ],
@@ -248,7 +246,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'A New Model',
+                        text: 'Democratic Ownership',
                         version: 1,
                       },
                     ],
@@ -267,7 +265,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'The Industrial Age model of owners and workers is falling apart. From both an ideological point of view (the imbalanced wealth and power distribution curves) and a practical point of view (AI and automation replacing many human worker tasks), it\'s clear that change is both a good idea and inevitable.',
+                        text: 'The Industrial Age model of separated owners and workers is obsolete. Imbalanced wealth distribution and AI replacing traditional jobs make this clear from both ideological and practical perspectives. We\'re pioneering a new model where ventures are owned by those who create, run, and maintain them—enabled by tokenization, DeFi, and collaborative networks.',
                         version: 1,
                       },
                     ],
@@ -289,7 +287,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
         ],
       },
       {
-        blockName: 'Our Approach',
+        blockName: 'How It Works',
         blockType: 'content',
         columns: [
           {
@@ -306,7 +304,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'A Network-Based Approach',
+                        text: 'How It Works',
                         version: 1,
                       },
                     ],
@@ -316,8 +314,23 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                     tag: 'h2',
                     version: 1,
                   },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            size: 'full',
+          },
+          {
+            enableLink: false,
+            richText: {
+              root: {
+                type: 'root',
+                children: [
                   {
-                    type: 'paragraph',
+                    type: 'heading',
                     children: [
                       {
                         type: 'text',
@@ -325,14 +338,14 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'HCE Venture Studio offers a new approach to creating and launching businesses. A network of builders, strategists, marketers, and other specialists swarm around chosen ideas to rapidly develop, test, and launch new businesses. The goal of this studio is to develop a portfolio of profitable businesses, each owned by those who create, run, and maintain them.',
+                        text: 'Venture Creation Engine',
                         version: 1,
                       },
                     ],
                     direction: 'ltr',
                     format: '',
                     indent: 0,
-                    textFormat: 0,
+                    tag: 'h3',
                     version: 1,
                   },
                   {
@@ -344,7 +357,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'This is becoming possible in this new high-tech AI world of ours. Small and nimble teams equipped with advanced tools can achieve what once required entire corporations. Tokenisation and decentralised finance (DeFi) can complement this process, allowing new forms of participation, investment, and value exchange.',
+                        text: 'We function as a continuous innovation engine, identifying opportunities, prototyping solutions, and launching ventures. Each project enriches our collective knowledge and IP, while retaining the potential to scale or spin out as an independent business.',
                         version: 1,
                       },
                     ],
@@ -361,15 +374,10 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                 version: 1,
               },
             },
-            size: 'full',
+            size: 'oneThird',
           },
-        ],
-      },
-      {
-        blockName: 'Agency Services',
-        blockType: 'content',
-        columns: [
           {
+            enableLink: false,
             richText: {
               root: {
                 type: 'root',
@@ -383,14 +391,14 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Open to Agency-Style Work',
+                        text: 'Network Power',
                         version: 1,
                       },
                     ],
                     direction: 'ltr',
                     format: '',
                     indent: 0,
-                    tag: 'h2',
+                    tag: 'h3',
                     version: 1,
                   },
                   {
@@ -402,7 +410,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'As we build the studio, we are also open to agency-style development work. Human-Centric Engineering has recently pivoted to become a boutique digital agency on the back of some successful projects. We specialise in turning half-formed ideas and conceptual visions into reality. We do it quickly, and we do it well. We blend the speed and power of AI tooling with the quality and craftsmanship that come from our many decades as developers, managers, and delivery leaders.',
+                        text: 'Our network of builders, strategists, and specialists swarms around chosen ideas, bringing diverse expertise to rapidly develop and test new businesses. This collaborative model amplifies capability while maintaining agility.',
                         version: 1,
                       },
                     ],
@@ -419,12 +427,65 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                 version: 1,
               },
             },
-            size: 'full',
+            size: 'oneThird',
+          },
+          {
+            enableLink: false,
+            richText: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'heading',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Shared Success',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    tag: 'h3',
+                    version: 1,
+                  },
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Ventures are owned by those who create, run, and maintain them. Through tokenization and innovative value exchange mechanisms, we ensure that contributors share in the success they help create.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    textFormat: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            size: 'oneThird',
           },
         ],
       },
       {
-        blockName: 'Why HCE',
+        blockName: 'The Philosophy',
         blockType: 'content',
         columns: [
           {
@@ -441,7 +502,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Why Human-Centric Engineering',
+                        text: 'The Human-Centric Philosophy',
                         version: 1,
                       },
                     ],
@@ -460,7 +521,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'Human-Centric Engineering started life as a consultancy to help CTOs and engineering leaders improve engineering culture and software delivery performance by looking at the human aspects of software development, not just the tech and processes. The underpinning philosophy was:',
+                        text: 'Our name isn\'t just branding—it reflects a core belief that emerged from years of helping engineering leaders build better teams and deliver better software. The philosophy that guides everything we do:',
                         version: 1,
                       },
                     ],
@@ -533,7 +594,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'The founders are experienced engineers and engineering leaders, with a product mindset, human-centric philosophy, and entrepreneurial vision. We think, let\'s build the new way. Let\'s be the model. Let\'s show how we can be both human-centric AND fully leverage AI. It should be a symbiotic relationship, not human vs AI.',
+                        text: 'This philosophy drives our approach to building ventures. We believe in a symbiotic relationship between humans and AI—not human versus AI, but human and AI working together. Our experienced founders bring decades of engineering leadership, product thinking, and entrepreneurial vision to show that you can be both human-centric and technologically advanced.',
                         version: 1,
                       },
                     ],
@@ -555,6 +616,151 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
         ],
       },
       {
+        blockName: 'What We Offer',
+        blockType: 'content',
+        columns: [
+          {
+            richText: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'heading',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'What We Offer',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    tag: 'h2',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            size: 'full',
+          },
+          {
+            enableLink: false,
+            richText: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'heading',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Venture Studio',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    tag: 'h3',
+                    version: 1,
+                  },
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Join our network to collaborate on building the next generation of ventures. We identify opportunities, rapidly prototype solutions, and launch businesses together. Contributors own what they create, sharing in both the work and the rewards. This is entrepreneurship reimagined for the AI age.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    textFormat: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            size: 'half',
+          },
+          {
+            enableLink: false,
+            richText: {
+              root: {
+                type: 'root',
+                children: [
+                  {
+                    type: 'heading',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'Boutique Agency',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    tag: 'h3',
+                    version: 1,
+                  },
+                  {
+                    type: 'paragraph',
+                    children: [
+                      {
+                        type: 'text',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: 'We turn half-formed ideas into market-ready products. Quickly and excellently. Our boutique digital agency blends AI-powered speed with decades of engineering and delivery expertise. We specialize in conceptual visions that need both technical skill and strategic thinking to become reality.',
+                        version: 1,
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    textFormat: 0,
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+              },
+            },
+            size: 'half',
+          },
+        ],
+      },
+      {
         blockName: 'CTA',
         blockType: 'cta',
         links: [
@@ -570,8 +776,8 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
             link: {
               type: 'custom',
               appearance: 'outline',
-              label: 'View Our Work',
-              url: '/projects',
+              label: 'Get in Touch',
+              url: '/contact',
             },
           },
         ],
@@ -588,7 +794,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                     format: 0,
                     mode: 'normal',
                     style: '',
-                    text: 'Want to Be Part of This?',
+                    text: 'Ready to Build With Us?',
                     version: 1,
                   },
                 ],
@@ -607,7 +813,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                     format: 0,
                     mode: 'normal',
                     style: '',
-                    text: 'We\'re building a network of people who share our vision and can collaborate on building the studio, the platform, and the ventures.',
+                    text: 'Whether you want to join our venture network or need help bringing your vision to life, we\'d love to hear from you.',
                     version: 1,
                   },
                 ],
@@ -628,9 +834,9 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
     ],
     meta: {
       description:
-        'Learn about HCE Venture Studio - an innovation hub redefining entrepreneurship in the AI age through human-centric values and network-based collaboration.',
+        'Where human ingenuity meets AI capability. Learn about HCE Venture Studio\'s approach to building tomorrow\'s ventures through network collaboration and democratic ownership.',
       image: heroImage.id,
-      title: 'About Us | HCE Venture Studio',
+      title: 'About | HCE Venture Studio',
     },
     title: 'About',
   }
