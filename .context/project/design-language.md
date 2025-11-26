@@ -26,6 +26,14 @@ Modern tech-focused aesthetic that balances slick professionalism with human-cen
 - **Body:** `text-sm md:text-base` or `text-base md:text-lg` with `leading-relaxed`
 - **Gradient text:** Use `.text-gradient` utility class for accent headings
 
+## Icons
+
+- **Library:** Lucide React (`lucide-react`)
+- **Usage:** Import icons as needed: `import { IconName } from 'lucide-react'`
+- **Sizing:** Typically `w-4 h-4` to `w-6 h-6` depending on context
+- **Colors:** Use `text-foreground/60` for muted, `text-primary` for accent
+- **Example:** `<ChevronDown className="w-4 h-4 text-foreground/60" />`
+
 ## Spacing & Layout
 
 - **Containers:** Standard `container` class with responsive padding
