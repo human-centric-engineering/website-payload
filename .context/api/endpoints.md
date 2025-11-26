@@ -381,6 +381,50 @@ GET /api/posts?where[_status][equals]=published&depth=2&sort=-publishedAt&limit=
 
 ---
 
+### Projects Collection
+
+- `GET /api/projects` - Find all projects
+- `GET /api/projects/:id` - Get project by ID
+- `POST /api/projects` - Create new project
+- `PATCH /api/projects/:id` - Update project
+- `DELETE /api/projects/:id` - Delete project
+
+**Unique Features**:
+- Draft/Published workflow (`_status` field)
+- Rich text description with toolbar (Lexical editor)
+- Project type (venture/agency)
+- Project status (active/completed/in-development)
+- Technologies array
+- Links group (website, case study, repository)
+
+**Example Query** (Get published venture projects):
+```http
+GET /api/projects?where[_status][equals]=published&where[projectType][equals]=venture&sort=-publishedAt
+```
+
+---
+
+### Network Collection
+
+- `GET /api/network` - Find all network members
+- `GET /api/network/:id` - Get network member by ID
+- `POST /api/network` - Create new network member
+- `PATCH /api/network/:id` - Update network member
+- `DELETE /api/network/:id` - Delete network member
+
+**Unique Features**:
+- Role selection (designer/developer/strategist/marketer/other)
+- Skills array for capabilities
+- Social links (LinkedIn, GitHub, website)
+- Featured toggle for homepage display
+
+**Example Query** (Get featured developers):
+```http
+GET /api/network?where[featured][equals]=true&where[role][equals]=developer
+```
+
+---
+
 ### Media Collection
 
 - `GET /api/media` - Find all media

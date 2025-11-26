@@ -115,6 +115,108 @@ export interface Post {
 
 ---
 
+### Project Model
+
+```typescript
+export interface Project {
+  id: number
+  title: string
+  slug: string
+  _status?: ('draft' | 'published') | null
+  projectType: 'venture' | 'agency'
+  projectStatus: 'active' | 'completed' | 'in-development'
+  heroImage: number | Media
+  excerpt: string
+  description: {
+    root: {
+      type: string
+      children: any[]
+      direction: 'ltr' | 'rtl' | null
+      format: string
+      indent: number
+      version: number
+    }
+  }
+  technologies?: { tech: string; id?: string }[] | null
+  links?: {
+    website?: string | null
+    caseStudy?: string | null
+    repository?: string | null
+  } | null
+  meta?: {
+    title?: string | null
+    description?: string | null
+    image?: number | Media | null
+  }
+  publishedAt?: string | null
+  updatedAt: string
+  createdAt: string
+}
+```
+
+**Field Descriptions**:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | `number` | Yes | Auto-generated ID |
+| `title` | `string` | Yes | Project title |
+| `slug` | `string` | Yes | URL slug (unique) |
+| `_status` | `'draft' \| 'published'` | No | Publication status |
+| `projectType` | `'venture' \| 'agency'` | Yes | Project category |
+| `projectStatus` | `enum` | Yes | Current status (active/completed/in-development) |
+| `heroImage` | `Media` | Yes | Hero image relationship |
+| `excerpt` | `string` | Yes | Brief description for listings |
+| `description` | `Lexical JSON` | Yes | Full rich text description with toolbar |
+| `technologies` | `array` | No | Technologies used |
+| `links` | `object` | No | External project links |
+| `meta` | `object` | No | SEO metadata |
+| `publishedAt` | `string` | No | ISO 8601 timestamp |
+
+**Important Notes**:
+- `projectStatus` field renamed from `status` to avoid enum conflict with `_status`
+- Description uses Lexical editor with FixedToolbarFeature and InlineToolbarFeature
+- All listitem nodes in seed data must include `indent: 0` property
+
+---
+
+### Network Model
+
+```typescript
+export interface Network {
+  id: number
+  name: string
+  role: 'designer' | 'developer' | 'strategist' | 'marketer' | 'other'
+  bio?: string | null
+  photo?: number | Media | null
+  skills?: { skill: string; id?: string }[] | null
+  featured?: boolean | null
+  links?: {
+    linkedIn?: string | null
+    github?: string | null
+    website?: string | null
+  } | null
+  updatedAt: string
+  createdAt: string
+}
+```
+
+**Field Descriptions**:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | `number` | Yes | Auto-generated ID |
+| `name` | `string` | Yes | Member name |
+| `role` | `enum` | Yes | Primary role in network |
+| `bio` | `string` | No | Member biography (textarea) |
+| `photo` | `Media` | No | Profile photo relationship |
+| `skills` | `array` | No | Array of skill strings |
+| `featured` | `boolean` | No | Show on homepage (default: false) |
+| `links` | `object` | No | Social/professional links |
+| `updatedAt` | `string` | Yes | Auto-managed timestamp |
+| `createdAt` | `string` | Yes | Auto-managed timestamp |
+
+---
+
 ### Media Model
 
 ```typescript
