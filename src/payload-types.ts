@@ -601,6 +601,10 @@ export interface ArchiveBlock {
 export interface FormBlock {
   form: number | Form;
   enableIntro?: boolean | null;
+  /**
+   * Choose how to display the intro content relative to the form
+   */
+  layout?: ('stacked' | 'sideBySide') | null;
   introContent?: {
     root: {
       type: string;
@@ -1334,6 +1338,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
 export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
+  layout?: T;
   introContent?: T;
   id?: T;
   blockName?: T;
