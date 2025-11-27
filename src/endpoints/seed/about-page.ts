@@ -86,8 +86,10 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
       {
         blockName: 'Mission Statement',
         blockType: 'content',
+        blockStyle: 'default',
         columns: [
           {
+            icon: '',
             richText: {
               root: {
                 type: 'root',
@@ -137,13 +139,19 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                 version: 1,
               },
             },
-            size: 'full',
+            size: 'twoThirds',
+          },
+          {
+            icon: '',
+            media: heroImage.id,
+            size: 'oneThird',
           },
         ],
       },
       {
         blockName: 'The Future of Work',
         blockType: 'content',
+        blockStyle: 'withDivider',
         columns: [
           {
             richText: {
@@ -180,6 +188,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Sparkles',
             richText: {
               root: {
                 type: 'root',
@@ -233,6 +242,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Scale',
             richText: {
               root: {
                 type: 'root',
@@ -289,6 +299,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
       {
         blockName: 'How It Works',
         blockType: 'content',
+        blockStyle: 'default',
         columns: [
           {
             richText: {
@@ -325,6 +336,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Rocket',
             richText: {
               root: {
                 type: 'root',
@@ -378,6 +390,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Users',
             richText: {
               root: {
                 type: 'root',
@@ -431,6 +444,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'TrendingUp',
             richText: {
               root: {
                 type: 'root',
@@ -487,8 +501,15 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
       {
         blockName: 'The Philosophy',
         blockType: 'content',
+        blockStyle: 'featured',
         columns: [
           {
+            icon: '',
+            media: heroImage.id,
+            size: 'oneThird',
+          },
+          {
+            icon: '',
             richText: {
               root: {
                 type: 'root',
@@ -611,13 +632,14 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                 version: 1,
               },
             },
-            size: 'full',
+            size: 'twoThirds',
           },
         ],
       },
       {
         blockName: 'What We Offer',
         blockType: 'content',
+        blockStyle: 'withDivider',
         columns: [
           {
             richText: {
@@ -654,6 +676,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Lightbulb',
             richText: {
               root: {
                 type: 'root',
@@ -707,6 +730,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           },
           {
             enableLink: false,
+            icon: 'Zap',
             richText: {
               root: {
                 type: 'root',
