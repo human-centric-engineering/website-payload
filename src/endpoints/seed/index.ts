@@ -1,4 +1,6 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
@@ -10,11 +12,19 @@ import { whitepaperPage } from './whitepaper-page'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
+import { profileSimonHolmes } from './profile-simon-holmes'
+import { profileJohnDurrant } from './profile-john-durrant'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
 import { ventureProject1, agencyProject1, agencyProject2 } from './project-seed-data'
-import { networkMember1, networkMember2, networkMember3 } from './network-seed-data'
+import {
+  networkMember1,
+  networkMember2,
+  networkMember3,
+  simonHolmes,
+  johnDurrant,
+} from './network-seed-data'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -91,7 +101,14 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding media...`)
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
+  const [
+    image1Buffer,
+    image2Buffer,
+    image3Buffer,
+    hero1Buffer,
+    profileSimonBuffer,
+    profileJohnBuffer,
+  ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
     ),
@@ -104,9 +121,19 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
     ),
+    fetchFileByURL('profile-simon-holmes.webp'),
+    fetchFileByURL('profile-john-durrant.webp'),
   ])
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
+  const [
+    demoAuthor,
+    image1Doc,
+    image2Doc,
+    image3Doc,
+    imageHomeDoc,
+    profileSimonDoc,
+    profileJohnDoc,
+  ] = await Promise.all([
     payload.create({
       collection: 'users',
       data: {
@@ -134,6 +161,16 @@ export const seed = async ({
       collection: 'media',
       data: imageHero1,
       file: hero1Buffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: profileSimonHolmes,
+      file: profileSimonBuffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: profileJohnDurrant,
+      file: profileJohnBuffer,
     }),
     categories.map((category) =>
       payload.create({
@@ -301,6 +338,22 @@ export const seed = async ({
       },
       data: networkMember3({ profileImageID: image3Doc.id }),
     }),
+    payload.create({
+      collection: 'network',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: simonHolmes({ profileImageID: profileSimonDoc.id }),
+    }),
+    payload.create({
+      collection: 'network',
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+      data: johnDurrant({ profileImageID: profileJohnDoc.id }),
+    }),
   ])
 
   payload.logger.info(`— Seeding globals...`)
@@ -391,22 +444,39 @@ export const seed = async ({
   payload.logger.info('Seeded database successfully!')
 }
 
-async function fetchFileByURL(url: string): Promise<File> {
-  const res = await fetch(url, {
+async function fetchFileByURL(urlOrPath: string): Promise<File> {
+  // If it's a local file (doesn't start with http), read from filesystem
+  if (!urlOrPath.startsWith('http')) {
+    // Use process.cwd() to get project root, then navigate to src/endpoints/seed
+    const filePath = resolve(process.cwd(), 'src/endpoints/seed', urlOrPath)
+    const buffer = readFileSync(filePath)
+    const name = urlOrPath.split('/').pop() || `file-${Date.now()}`
+    const ext = name.split('.').pop()
+
+    return {
+      name,
+      data: buffer,
+      mimetype: `image/${ext}`,
+      size: buffer.byteLength,
+    }
+  }
+
+  // Otherwise, fetch from URL (existing logic)
+  const res = await fetch(urlOrPath, {
     credentials: 'include',
     method: 'GET',
   })
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch file from ${url}, status: ${res.status}`)
+    throw new Error(`Failed to fetch file from ${urlOrPath}, status: ${res.status}`)
   }
 
   const data = await res.arrayBuffer()
 
   return {
-    name: url.split('/').pop() || `file-${Date.now()}`,
+    name: urlOrPath.split('/').pop() || `file-${Date.now()}`,
     data: Buffer.from(data),
-    mimetype: `image/${url.split('.').pop()}`,
+    mimetype: `image/${urlOrPath.split('.').pop()}`,
     size: data.byteLength,
   }
 }

@@ -63,7 +63,7 @@ function NetworkCard({ member }: { member: Network }) {
     <div className="border border-border rounded-lg overflow-hidden">
       {member.profileImage && typeof member.profileImage === 'object' && (
         <div className="relative aspect-square overflow-hidden bg-muted">
-          <Media resource={member.profileImage} className="object-cover" fill />
+          <Media resource={member.profileImage} imgClassName="object-cover" fill />
         </div>
       )}
       <div className="p-6">
