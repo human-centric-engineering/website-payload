@@ -7,6 +7,8 @@ import React from 'react'
 import Link from 'next/link'
 import { Media } from '@/components/Media'
 
+type ProjectCardData = Pick<Project, 'id' | 'title' | 'slug' | 'projectType' | 'projectStatus' | 'excerpt' | 'heroImage'>
+
 export const dynamic = 'force-static'
 export const revalidate = 600
 
@@ -76,7 +78,7 @@ export default async function ProjectsPage() {
   )
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project }: { project: ProjectCardData }) {
   return (
     <Link
       href={`/projects/${project.slug}`}

@@ -1,18 +1,14 @@
-import type { RequiredDataFromCollectionSlug } from 'payload'
-
 type ProjectArgs = {
-  heroImageID: string
+  heroImageID: number
 }
 
-export const ventureProject1: (
-  args: ProjectArgs,
-) => RequiredDataFromCollectionSlug<'projects'> = ({ heroImageID }) => {
+export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
   return {
     slug: 'ai-market-research-platform',
-    _status: 'published',
+    _status: 'published' as const,
     title: 'AI-Powered Market Research Platform',
-    projectType: 'venture',
-    projectStatus: 'in-development',
+    projectType: 'venture' as const,
+    projectStatus: 'in-development' as const,
     heroImage: heroImageID,
     excerpt:
       'An intelligent platform that democratises market research by combining AI analysis with human insight, making sophisticated market intelligence accessible to startups and SMEs.',
@@ -152,15 +148,13 @@ export const ventureProject1: (
   }
 }
 
-export const agencyProject1: (
-  args: ProjectArgs,
-) => RequiredDataFromCollectionSlug<'projects'> = ({ heroImageID }) => {
+export const agencyProject1 = ({ heroImageID }: ProjectArgs) => {
   return {
     slug: 'enterprise-crm-modernisation',
-    _status: 'published',
+    _status: 'published' as const,
     title: 'Enterprise CRM Modernisation',
-    projectType: 'agency',
-    projectStatus: 'completed',
+    projectType: 'agency' as const,
+    projectStatus: 'completed' as const,
     heroImage: heroImageID,
     excerpt:
       'Complete overhaul of a legacy CRM system for a multinational professional services firm, improving user experience and operational efficiency whilst maintaining critical business processes.',
@@ -300,15 +294,13 @@ export const agencyProject1: (
   }
 }
 
-export const agencyProject2: (
-  args: ProjectArgs,
-) => RequiredDataFromCollectionSlug<'projects'> = ({ heroImageID }) => {
+export const agencyProject2 = ({ heroImageID }: ProjectArgs) => {
   return {
     slug: 'sustainable-ecommerce-platform',
-    _status: 'published',
+    _status: 'published' as const,
     title: 'Sustainable Fashion E-Commerce Platform',
-    projectType: 'agency',
-    projectStatus: 'active',
+    projectType: 'agency' as const,
+    projectStatus: 'active' as const,
     heroImage: heroImageID,
     excerpt:
       'A purpose-built e-commerce platform for an ethical fashion brand, designed to showcase sustainability credentials and tell the story behind each product whilst delivering a seamless shopping experience.',
