@@ -3,12 +3,10 @@ import type { Media } from '@/payload-types'
 
 type HomeArgs = {
   heroImage: Media
-  metaImage: Media
 }
 
 export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
-  metaImage,
 }) => {
   return {
     slug: 'home',
@@ -282,11 +280,6 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
             size: 'oneThird',
           },
         ],
-      },
-      {
-        blockName: 'Media Block',
-        blockType: 'mediaBlock',
-        media: metaImage.id,
       },
       {
         blockName: 'CTA',

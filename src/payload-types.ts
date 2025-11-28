@@ -493,9 +493,21 @@ export interface CallToActionBlock {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
+  /**
+   * Visual style for this content block
+   */
+  blockStyle?: ('default' | 'featured' | 'withDivider') | null;
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        /**
+         * Lucide icon name (e.g., "Rocket", "Users", "Sparkles")
+         */
+        icon?: string | null;
+        /**
+         * Optional image for this column
+         */
+        media?: (number | null) | Media;
         richText?: {
           root: {
             type: string;
@@ -589,6 +601,10 @@ export interface ArchiveBlock {
 export interface FormBlock {
   form: number | Form;
   enableIntro?: boolean | null;
+  /**
+   * Choose how to display the intro content relative to the form
+   */
+  layout?: ('stacked' | 'sideBySide') | null;
   introContent?: {
     root: {
       type: string;
@@ -1268,10 +1284,13 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
+  blockStyle?: T;
   columns?:
     | T
     | {
         size?: T;
+        icon?: T;
+        media?: T;
         richText?: T;
         enableLink?: T;
         link?:
@@ -1319,6 +1338,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
 export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
+  layout?: T;
   introContent?: T;
   id?: T;
   blockName?: T;

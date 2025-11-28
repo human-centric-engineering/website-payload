@@ -4,7 +4,9 @@ import type { Network } from '@/payload-types'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
+import Link from 'next/link'
 import { Media } from '@/components/Media'
+import { Button } from '@/components/ui/button'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -16,6 +18,7 @@ export default async function NetworkPage() {
     collection: 'network',
     depth: 1,
     limit: 50,
+    sort: 'createdAt',
     overrideAccess: false,
     select: {
       name: true,
@@ -40,13 +43,32 @@ export default async function NetworkPage() {
       </div>
 
       {network.docs.length > 0 ? (
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {network.docs.map((member) => (
-              <NetworkCard key={member.id} member={member} />
-            ))}
+        <>
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {network.docs.map((member) => (
+                <NetworkCard key={member.id} member={member} />
+              ))}
+            </div>
           </div>
-        </div>
+
+          {/* Call to Action */}
+          <div className="container mt-24">
+            <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-12 md:p-16 text-center">
+              {/* Decorative gradient blur */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10" />
+
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Join the Network</h2>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Are you a builder, strategist, or innovator excited about redefining entrepreneurship
+                in the AI age? We'd love to hear from you.
+              </p>
+              <Button asChild size="lg">
+                <Link href="/join">Join Us</Link>
+              </Button>
+            </div>
+          </div>
+        </>
       ) : (
         <div className="container">
           <p className="text-center text-muted-foreground">
@@ -63,7 +85,7 @@ function NetworkCard({ member }: { member: Network }) {
     <div className="border border-border rounded-lg overflow-hidden">
       {member.profileImage && typeof member.profileImage === 'object' && (
         <div className="relative aspect-square overflow-hidden bg-muted">
-          <Media resource={member.profileImage} className="object-cover" fill />
+          <Media resource={member.profileImage} imgClassName="object-cover" fill />
         </div>
       )}
       <div className="p-6">

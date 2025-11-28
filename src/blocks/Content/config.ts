@@ -34,6 +34,21 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'icon',
+    type: 'text',
+    admin: {
+      description: 'Lucide icon name (e.g., "Rocket", "Users", "Sparkles")',
+    },
+  },
+  {
+    name: 'media',
+    type: 'upload',
+    relationTo: 'media',
+    admin: {
+      description: 'Optional image for this column',
+    },
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
@@ -67,6 +82,28 @@ export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
+    {
+      name: 'blockStyle',
+      type: 'select',
+      defaultValue: 'default',
+      admin: {
+        description: 'Visual style for this content block',
+      },
+      options: [
+        {
+          label: 'Default',
+          value: 'default',
+        },
+        {
+          label: 'Featured Panel (darker background)',
+          value: 'featured',
+        },
+        {
+          label: 'With Top Divider',
+          value: 'withDivider',
+        },
+      ],
+    },
     {
       name: 'columns',
       type: 'array',
