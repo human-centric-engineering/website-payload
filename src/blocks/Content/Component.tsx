@@ -49,8 +49,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
             const isOneThird = size === 'oneThird'
 
             // Dynamically get the icon component
-            const IconComponent = icon
-              ? LucideIcons[icon as keyof typeof LucideIcons]
+            const IconComponent = icon && icon in LucideIcons
+              ? (LucideIcons[icon as keyof typeof LucideIcons] as React.ComponentType<{ className?: string; strokeWidth?: number }>)
               : null
 
             // Check if this is an image-only column (oneThird with media but no richText)

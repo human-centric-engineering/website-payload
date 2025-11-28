@@ -1,7 +1,19 @@
 import type { CollectionConfig } from 'payload'
 
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { Banner } from '../../blocks/Banner/config'
+import { Code } from '../../blocks/Code/config'
+import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidateProject } from './hooks/revalidateProject'
 
@@ -13,7 +25,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
-import { FixedToolbarFeature, InlineToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Projects: CollectionConfig<'projects'> = {
   slug: 'projects',
@@ -119,21 +130,22 @@ export const Projects: CollectionConfig<'projects'> = {
               },
             },
             {
-              name: 'description',
+              name: 'content',
               type: 'richText',
-              required: true,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
+                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
+                    HorizontalRuleFeature(),
                   ]
                 },
               }),
-              admin: {
-                description: 'Full project description',
-              },
+              label: false,
+              required: true,
             },
             {
               name: 'technologies',
@@ -232,8 +244,9 @@ export const Projects: CollectionConfig<'projects'> = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // autosave every 100ms
+        interval: 100,
       },
+      schedulePublish: true,
     },
     maxPerDoc: 50,
   },

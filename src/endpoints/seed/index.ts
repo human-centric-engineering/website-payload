@@ -292,7 +292,7 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: ventureProject1({ heroImageID: imageHomeDoc.id }),
+      data: ventureProject1({ heroImageID: imageHomeDoc.id }) as any,
     }),
     payload.create({
       collection: 'projects',
@@ -300,7 +300,7 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: agencyProject1({ heroImageID: image1Doc.id }),
+      data: agencyProject1({ heroImageID: image1Doc.id }) as any,
     }),
     payload.create({
       collection: 'projects',
@@ -308,7 +308,7 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-      data: agencyProject2({ heroImageID: image2Doc.id }),
+      data: agencyProject2({ heroImageID: image2Doc.id }) as any,
     }),
   ])
 

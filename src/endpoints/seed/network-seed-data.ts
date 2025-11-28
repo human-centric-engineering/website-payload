@@ -1,15 +1,11 @@
-import type { RequiredDataFromCollectionSlug } from 'payload'
-
 type NetworkArgs = {
-  profileImageID: string
+  profileImageID: number
 }
 
-export const simonHolmes: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
+export const simonHolmes = ({ profileImageID }: NetworkArgs) => {
   return {
     slug: 'simon-holmes',
-    _status: 'published',
+    _status: 'published' as const,
     name: 'Simon Holmes',
     role: 'Founder & bald',
     profileImage: profileImageID,
@@ -28,12 +24,10 @@ export const simonHolmes: (args: NetworkArgs) => RequiredDataFromCollectionSlug<
   }
 }
 
-export const johnDurrant: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
+export const johnDurrant = ({ profileImageID }: NetworkArgs) => {
   return {
     slug: 'john-durrant',
-    _status: 'published',
+    _status: 'published' as const,
     name: 'John Durrant',
     role: 'Founder & athlete',
     profileImage: profileImageID,
@@ -52,12 +46,10 @@ export const johnDurrant: (args: NetworkArgs) => RequiredDataFromCollectionSlug<
   }
 }
 
-export const networkMember1: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
+export const networkMember1 = ({ profileImageID }: NetworkArgs) => {
   return {
     slug: 'alex-chen',
-    _status: 'published',
+    _status: 'published' as const,
     name: 'Alex Chen',
     role: 'AI/ML Engineer & Venture Partner',
     profileImage: profileImageID,
@@ -84,12 +76,10 @@ export const networkMember1: (args: NetworkArgs) => RequiredDataFromCollectionSl
   }
 }
 
-export const networkMember2: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
+export const networkMember2 = ({ profileImageID }: NetworkArgs) => {
   return {
     slug: 'sarah-williams',
-    _status: 'published',
+    _status: 'published' as const,
     name: 'Sarah Williams',
     role: 'Product Strategy & UX Design',
     profileImage: profileImageID,
@@ -116,12 +106,10 @@ export const networkMember2: (args: NetworkArgs) => RequiredDataFromCollectionSl
   }
 }
 
-export const networkMember3: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
+export const networkMember3 = ({ profileImageID }: NetworkArgs) => {
   return {
     slug: 'james-okonkwo',
-    _status: 'published',
+    _status: 'published' as const,
     name: 'James Okonkwo',
     role: 'Full-Stack Developer & DevOps',
     profileImage: profileImageID,

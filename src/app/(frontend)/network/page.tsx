@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { Media } from '@/components/Media'
 import { Button } from '@/components/ui/button'
 
+type NetworkMember = Pick<Network, 'id' | 'name' | 'role' | 'bio' | 'profileImage' | 'skills' | 'socialLinks'>
+
 export const dynamic = 'force-static'
 export const revalidate = 600
 
@@ -61,7 +63,7 @@ export default async function NetworkPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Join the Network</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Are you a builder, strategist, or innovator excited about redefining entrepreneurship
-                in the AI age? We'd love to hear from you.
+                in the AI age? We&apos;d love to hear from you.
               </p>
               <Button asChild size="lg">
                 <Link href="/join">Join Us</Link>
@@ -80,7 +82,7 @@ export default async function NetworkPage() {
   )
 }
 
-function NetworkCard({ member }: { member: Network }) {
+function NetworkCard({ member }: { member: NetworkMember }) {
   return (
     <div className="border border-border rounded-lg overflow-hidden">
       {member.profileImage && typeof member.profileImage === 'object' && (
