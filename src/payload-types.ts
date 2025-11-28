@@ -812,10 +812,7 @@ export interface Project {
    * Brief project description for listing pages
    */
   excerpt: string;
-  /**
-   * Full project description
-   */
-  description: {
+  content: {
     root: {
       type: string;
       children: {
@@ -1384,7 +1381,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   projectStatus?: T;
   heroImage?: T;
   excerpt?: T;
-  description?: T;
+  content?: T;
   technologies?:
     | T
     | {
@@ -1974,6 +1971,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
+        } | null)
+      | ({
+          relationTo: 'projects';
+          value: number | Project;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

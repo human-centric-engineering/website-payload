@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
 
+import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React from 'react'
-import { notFound } from 'next/navigation'
-import { Media } from '@/components/Media'
+import { draftMode } from 'next/headers'
+import React, { cache } from 'react'
 import RichText from '@/components/RichText'
+
+import type { Project } from '@/payload-types'
+
+import { generateMeta } from '@/utilities/generateMeta'
+import PageClient from './page.client'
+import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { Media } from '@/components/Media'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -20,43 +27,37 @@ export async function generateStaticParams() {
     },
   })
 
-  return projects.docs.map(({ slug }) => ({
-    slug,
-  }))
+  const params = projects.docs.map(({ slug }) => {
+    return { slug }
+  })
+
+  return params
 }
 
 type Args = {
   params: Promise<{
-    slug: string
+    slug?: string
   }>
 }
 
-export default async function ProjectPage({ params: paramsPromise }: Args) {
-  const { slug } = await paramsPromise
+export default async function Project({ params: paramsPromise }: Args) {
+  const { isEnabled: draft } = await draftMode()
+  const { slug = '' } = await paramsPromise
   const decodedSlug = decodeURIComponent(slug)
+  const url = '/projects/' + decodedSlug
+  const project = await queryProjectBySlug({ slug: decodedSlug })
 
-  const payload = await getPayload({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'projects',
-    draft: false,
-    limit: 1,
-    overrideAccess: false,
-    where: {
-      slug: {
-        equals: decodedSlug,
-      },
-    },
-  })
-
-  const project = result.docs[0]
-
-  if (!project) {
-    return notFound()
-  }
+  if (!project) return <PayloadRedirects url={url} />
 
   return (
-    <article className="pt-24 pb-24">
+    <article className="pt-16 pb-16">
+      <PageClient />
+
+      {/* Allows redirects for valid pages too */}
+      <PayloadRedirects disableNotFound url={url} />
+
+      {draft && <LivePreviewListener />}
+
       {/* Hero Image */}
       {project.heroImage && typeof project.heroImage === 'object' && (
         <div className="relative w-full h-[400px] mb-12">
@@ -80,19 +81,17 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
         </div>
       </div>
 
-      {/* Description */}
-      {project.description && (
-        <div className="container mb-12">
-          <div className="max-w-4xl mx-auto prose dark:prose-invert">
-            <RichText data={project.description} enableGutter={false} />
-          </div>
+      {/* Content - using same pattern as Posts */}
+      <div className="flex flex-col items-center gap-4 pt-8">
+        <div className="container">
+          <RichText className="max-w-[48rem] mx-auto" data={project.content} enableGutter={false} />
         </div>
-      )}
+      </div>
 
       {/* Technologies */}
       {project.technologies && project.technologies.length > 0 && (
-        <div className="container mb-12">
-          <div className="max-w-4xl mx-auto">
+        <div className="container mt-12">
+          <div className="max-w-[48rem] mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Technologies Used</h2>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((item, index) => (
@@ -110,8 +109,8 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
 
       {/* Links */}
       {project.links && (
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
+        <div className="container mt-12">
+          <div className="max-w-[48rem] mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Project Links</h2>
             <div className="flex flex-wrap gap-4">
               {project.links.website && (
@@ -153,47 +152,30 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug } = await paramsPromise
+  const { slug = '' } = await paramsPromise
   const decodedSlug = decodeURIComponent(slug)
+  const project = await queryProjectBySlug({ slug: decodedSlug })
+
+  return generateMeta({ doc: project })
+}
+
+const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
+  const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'projects',
-    draft: false,
+    draft,
     limit: 1,
-    overrideAccess: false,
+    overrideAccess: draft,
+    pagination: false,
     where: {
       slug: {
-        equals: decodedSlug,
+        equals: slug,
       },
     },
   })
 
-  const project = result.docs[0]
-
-  if (!project) {
-    return {
-      title: 'Project Not Found',
-    }
-  }
-
-  const ogImage =
-    project.meta?.image && typeof project.meta.image === 'object'
-      ? project.meta.image.url
-      : undefined
-
-  return {
-    title: project.meta?.title || project.title,
-    description: project.meta?.description || project.excerpt,
-    openGraph: ogImage
-      ? {
-          images: [
-            {
-              url: ogImage,
-            },
-          ],
-        }
-      : undefined,
-  }
-}
+  return result.docs?.[0] || null
+})

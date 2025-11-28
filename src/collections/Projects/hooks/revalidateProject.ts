@@ -7,7 +7,7 @@ import type { Project } from '../../../payload-types'
 export const revalidateProject: CollectionAfterChangeHook<Project> = ({
   doc,
   previousDoc,
-  req: { context, payload },
+  req: { payload, context },
 }) => {
   if (!context.disableRevalidate) {
     if (doc._status === 'published') {
@@ -16,34 +16,28 @@ export const revalidateProject: CollectionAfterChangeHook<Project> = ({
       payload.logger.info(`Revalidating project at path: ${path}`)
 
       revalidatePath(path)
-      revalidateTag('projects-collection')
+      revalidateTag('projects-sitemap')
     }
 
-    // If the project was previously published, but is now in draft status, revalidate the path
-    if (previousDoc?._status === 'published' && doc._status !== 'published') {
-      const path = `/projects/${doc.slug}`
+    // If the project was previously published, we need to revalidate the old path
+    if (previousDoc._status === 'published' && doc._status !== 'published') {
+      const oldPath = `/projects/${previousDoc.slug}`
 
-      payload.logger.info(`Revalidating project at path: ${path}`)
+      payload.logger.info(`Revalidating old project at path: ${oldPath}`)
 
-      revalidatePath(path)
-      revalidateTag('projects-collection')
+      revalidatePath(oldPath)
+      revalidateTag('projects-sitemap')
     }
   }
-
   return doc
 }
 
-export const revalidateDelete: CollectionAfterDeleteHook<Project> = ({
-  doc,
-  req: { context, payload },
-}) => {
+export const revalidateDelete: CollectionAfterDeleteHook<Project> = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
     const path = `/projects/${doc?.slug}`
 
-    payload.logger.info(`Revalidating project at path: ${path}`)
-
     revalidatePath(path)
-    revalidateTag('projects-collection')
+    revalidateTag('projects-sitemap')
   }
 
   return doc
