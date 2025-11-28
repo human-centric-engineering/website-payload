@@ -18,7 +18,7 @@ export const simonHolmes: (args: NetworkArgs) => RequiredDataFromCollectionSlug<
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/simondholmes/',
       twitter: '',
-      github: '',
+      github: 'https://github.com/simonholmes',
       website: 'https://simonholmes.com',
     },
     meta: {
@@ -42,7 +42,7 @@ export const johnDurrant: (args: NetworkArgs) => RequiredDataFromCollectionSlug<
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/johndurrant/',
       twitter: '',
-      github: '',
+      github: 'https://github.com/JohnD-EE',
       website: '',
     },
     meta: {
