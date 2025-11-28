@@ -254,33 +254,34 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_homePage, _aboutPageDoc, contactPage, _joinPageDoc, _whitepaperPageDoc] = await Promise.all([
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: home({ heroImage: imageHomeDoc }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: aboutPage({ heroImage: imageHomeDoc }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: joinPage({ joinForm: joinForm }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: whitepaperPage({ heroImage: imageHomeDoc }),
-    }),
-  ])
+  const [_homePage, _aboutPageDoc, contactPage, _joinPageDoc, _whitepaperPageDoc] =
+    await Promise.all([
+      payload.create({
+        collection: 'pages',
+        depth: 0,
+        data: home({ heroImage: imageHomeDoc }),
+      }),
+      payload.create({
+        collection: 'pages',
+        depth: 0,
+        data: aboutPage({ heroImage: imageHomeDoc }),
+      }),
+      payload.create({
+        collection: 'pages',
+        depth: 0,
+        data: contactPageData({ contactForm: contactForm }),
+      }),
+      payload.create({
+        collection: 'pages',
+        depth: 0,
+        data: joinPage({ joinForm: joinForm }),
+      }),
+      payload.create({
+        collection: 'pages',
+        depth: 0,
+        data: whitepaperPage({ heroImage: imageHomeDoc }),
+      }),
+    ])
 
   payload.logger.info(`— Seeding projects...`)
 
@@ -313,48 +314,52 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding network...`)
 
-  await Promise.all([
-    payload.create({
-      collection: 'network',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: networkMember1({ profileImageID: image1Doc.id }),
-    }),
-    payload.create({
-      collection: 'network',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: networkMember2({ profileImageID: image2Doc.id }),
-    }),
-    payload.create({
-      collection: 'network',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: networkMember3({ profileImageID: image3Doc.id }),
-    }),
-    payload.create({
-      collection: 'network',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: simonHolmes({ profileImageID: profileSimonDoc.id }),
-    }),
-    payload.create({
-      collection: 'network',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: johnDurrant({ profileImageID: profileJohnDoc.id }),
-    }),
-  ])
+  // Do not create network members with `Promise.all` because we want them to be created in order
+  // This way we can sort them by `createdAt` and they will be in the expected order
+  await payload.create({
+    collection: 'network',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: simonHolmes({ profileImageID: profileSimonDoc.id }),
+  })
+
+  await payload.create({
+    collection: 'network',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: johnDurrant({ profileImageID: profileJohnDoc.id }),
+  })
+
+  await payload.create({
+    collection: 'network',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: networkMember1({ profileImageID: image1Doc.id }),
+  })
+
+  await payload.create({
+    collection: 'network',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: networkMember2({ profileImageID: image2Doc.id }),
+  })
+
+  await payload.create({
+    collection: 'network',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: networkMember3({ profileImageID: image3Doc.id }),
+  })
 
   payload.logger.info(`— Seeding globals...`)
 

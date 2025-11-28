@@ -16,6 +16,7 @@ export default async function NetworkPage() {
     collection: 'network',
     depth: 1,
     limit: 50,
+    sort: 'createdAt',
     overrideAccess: false,
     select: {
       name: true,

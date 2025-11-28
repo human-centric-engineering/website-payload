@@ -4,6 +4,54 @@ type NetworkArgs = {
   profileImageID: string
 }
 
+export const simonHolmes: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
+  profileImageID,
+}) => {
+  return {
+    slug: 'simon-holmes',
+    _status: 'published',
+    name: 'Simon Holmes',
+    role: 'Founder & bald',
+    profileImage: profileImageID,
+    bio: 'Placeholder bio - will be updated manually through the admin panel.',
+    skills: [{ skill: 'Product engineering' }, { skill: 'Delivery' }],
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/in/simondholmes/',
+      twitter: '',
+      github: '',
+      website: 'https://simonholmes.com',
+    },
+    meta: {
+      title: 'Simon Holmes | HCE Network',
+      description: 'Founder & CEO at HCE Venture Studio.',
+    },
+  }
+}
+
+export const johnDurrant: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
+  profileImageID,
+}) => {
+  return {
+    slug: 'john-durrant',
+    _status: 'published',
+    name: 'John Durrant',
+    role: 'Founder & athlete',
+    profileImage: profileImageID,
+    bio: 'Placeholder bio - will be updated manually through the admin panel.',
+    skills: [{ skill: 'Product strategy' }, { skill: 'Ideation' }],
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/in/johndurrant/',
+      twitter: '',
+      github: '',
+      website: '',
+    },
+    meta: {
+      title: 'John Durrant | HCE Network',
+      description: 'Network member at HCE Venture Studio.',
+    },
+  }
+}
+
 export const networkMember1: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
   profileImageID,
 }) => {
@@ -98,54 +146,6 @@ export const networkMember3: (args: NetworkArgs) => RequiredDataFromCollectionSl
       title: 'James Okonkwo | HCE Network',
       description:
         'Full-Stack Developer & DevOps specialist at HCE. Building scalable systems and mentoring the next generation of developers.',
-    },
-  }
-}
-
-export const simonHolmes: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
-  return {
-    slug: 'simon-holmes',
-    _status: 'published',
-    name: 'Simon Holmes',
-    role: 'Founder & bald',
-    profileImage: profileImageID,
-    bio: 'Placeholder bio - will be updated manually through the admin panel.',
-    skills: [{ skill: 'Product engineering' }],
-    socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/simondholmes/',
-      twitter: '',
-      github: '',
-      website: 'https://simonholmes.com',
-    },
-    meta: {
-      title: 'Simon Holmes | HCE Network',
-      description: 'Founder & CEO at HCE Venture Studio.',
-    },
-  }
-}
-
-export const johnDurrant: (args: NetworkArgs) => RequiredDataFromCollectionSlug<'network'> = ({
-  profileImageID,
-}) => {
-  return {
-    slug: 'john-durrant',
-    _status: 'published',
-    name: 'John Durrant',
-    role: 'Founder & athlete',
-    profileImage: profileImageID,
-    bio: 'Placeholder bio - will be updated manually through the admin panel.',
-    skills: [{ skill: 'Product strategy' }],
-    socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/johndurrant/',
-      twitter: '',
-      github: '',
-      website: '',
-    },
-    meta: {
-      title: 'John Durrant | HCE Network',
-      description: 'Network member at HCE Venture Studio.',
     },
   }
 }
