@@ -67,7 +67,7 @@ export default async function Project({ params: paramsPromise }: Args) {
 
       {/* Header */}
       <div className="container mb-12">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-[48rem] mx-auto">
           <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">
               {project.projectType === 'venture' ? 'Venture Studio' : 'Agency Work'}
