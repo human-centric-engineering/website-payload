@@ -243,6 +243,7 @@ export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
       title: 'AI-Powered Market Research Platform | HCE Venture Studio',
       description:
         'Democratising market research through AI analysis and human insight. Making sophisticated market intelligence accessible to startups and SMEs.',
+      image: heroImageID,
     },
   }
 }
@@ -488,6 +489,7 @@ export const agencyProject1 = ({ heroImageID }: ProjectArgs) => {
       title: 'Enterprise CRM Modernisation Case Study | HCE',
       description:
         'Complete overhaul of a legacy CRM system for a multinational professional services firm, improving efficiency and user adoption.',
+      image: heroImageID,
     },
   }
 }
@@ -753,6 +755,7 @@ export const agencyProject2 = ({ heroImageID }: ProjectArgs) => {
       title: 'Sustainable Fashion E-Commerce Platform | HCE',
       description:
         'A purpose-built e-commerce platform showcasing sustainability credentials and ethical production whilst delivering seamless shopping.',
+      image: heroImageID,
     },
   }
 }
