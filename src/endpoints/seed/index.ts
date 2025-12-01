@@ -437,8 +437,18 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Join Us',
-              url: '/join',
+              label: 'Network',
+              url: '/network',
+            },
+          },
+          {
+            link: {
+              type: 'reference',
+              label: 'Contact',
+              reference: {
+                relationTo: 'pages',
+                value: contactPage.id,
+              },
             },
           },
         ],
