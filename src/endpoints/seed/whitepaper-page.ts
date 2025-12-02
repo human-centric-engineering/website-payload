@@ -333,7 +333,7 @@ export const whitepaperPage: (args: WhitepaperArgs) => RequiredDataFromCollectio
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'HCE Venture Studio operates as a network-based innovation hub where builders, strategists, and specialists collaborate to rapidly prototype and launch ventures. Unlike traditional venture models, ownership and value creation flow to those who build and maintain the businesses—not just to capital providers.',
+                        text: 'HCE Studio operates as a network-based innovation hub where builders, strategists, and specialists collaborate to rapidly prototype and launch ventures. Unlike traditional venture models, ownership and value creation flow to those who build and maintain the businesses—not just to capital providers.',
                         version: 1,
                       },
                     ],
@@ -755,9 +755,9 @@ export const whitepaperPage: (args: WhitepaperArgs) => RequiredDataFromCollectio
     ],
     meta: {
       description:
-        'Read the HCE Venture Studio whitepaper: A vision for human-centric venture creation in the AI age. Discover our model for redefining entrepreneurship.',
+        'Read the HCE Studio whitepaper: A vision for human-centric venture creation in the AI age. Discover our model for redefining entrepreneurship.',
       image: heroImage.id,
-      title: 'Whitepaper | HCE Venture Studio',
+      title: 'Whitepaper | HCE Studio',
     },
     title: 'Whitepaper',
   }

@@ -122,7 +122,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'HCE Venture Studio is an innovation engine for the AI age. We harness cutting-edge technology and collaborative networks to rapidly prototype, test, and launch digital ventures—dramatically reducing the time, cost, and friction between idea and market. Rather than building a single product, we\'ve created a system that continuously generates and deploys new businesses, each with the potential to scale or spin out as an independent entity.',
+                        text: 'HCE Studio is an innovation engine for the AI age. We harness cutting-edge technology and collaborative networks to rapidly prototype, test, and launch digital ventures—dramatically reducing the time, cost, and friction between idea and market. Rather than building a single product, we\'ve created a system that continuously generates and deploys new businesses, each with the potential to scale or spin out as an independent entity.',
                         version: 1,
                       },
                     ],
@@ -858,9 +858,9 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
     ],
     meta: {
       description:
-        'Where human ingenuity meets AI capability. Learn about HCE Venture Studio\'s approach to building tomorrow\'s ventures through network collaboration and democratic ownership.',
+        'Where human ingenuity meets AI capability. Learn about HCE Studio\'s approach to building tomorrow\'s ventures through network collaboration and democratic ownership.',
       image: heroImage.id,
-      title: 'About | HCE Venture Studio',
+      title: 'About | HCE Studio',
     },
     title: 'About',
   }

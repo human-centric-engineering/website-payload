@@ -240,7 +240,7 @@ export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
       repository: '',
     },
     meta: {
-      title: 'AI-Powered Market Research Platform | HCE Venture Studio',
+      title: 'AI-Powered Market Research Platform | HCE Studio',
       description:
         'Democratising market research through AI analysis and human insight. Making sophisticated market intelligence accessible to startups and SMEs.',
       image: heroImageID,

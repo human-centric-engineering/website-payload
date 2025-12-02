@@ -178,8 +178,8 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
     ],
     meta: {
       description:
-        'Get in touch with HCE Venture Studio. We specialise in turning half-formed ideas into reality, blending AI tooling with engineering craftsmanship.',
-      title: 'Contact Us | HCE Venture Studio',
+        'Get in touch with HCE Studio. We specialise in turning half-formed ideas into reality, blending AI tooling with engineering craftsmanship.',
+      title: 'Contact Us | HCE Studio',
     },
     title: 'Contact',
   }

@@ -64,7 +64,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'HCE Venture Studio is an innovation hub where small, nimble teams harness AI and automation to rapidly build, test, and launch digital-age ventures. We blend human-centric values with cutting-edge technology to create businesses owned by those who build them.',
+                  text: 'HCE Studio is an innovation hub where small, nimble teams harness AI and automation to rapidly build, test, and launch digital-age ventures. We blend human-centric values with cutting-edge technology to create businesses owned by those who build them.',
                   version: 1,
                 },
               ],
@@ -354,9 +354,9 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
       },
     ],
     meta: {
-      description: 'HCE Venture Studio - Redefining entrepreneurship in the AI age. An innovation hub for building digital-age ventures with human-centric values.',
+      description: 'HCE Studio - Redefining entrepreneurship in the AI age. An innovation hub for building digital-age ventures with human-centric values.',
       image: heroImage.id,
-      title: 'HCE Venture Studio | Human-Centric Engineering',
+      title: 'HCE Studio | Human-Centric Engineering',
     },
     title: 'Home',
   }

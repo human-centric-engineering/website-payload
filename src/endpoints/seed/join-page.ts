@@ -195,8 +195,8 @@ export const joinPage: (args: JoinArgs) => RequiredDataFromCollectionSlug<'pages
     ],
     meta: {
       description:
-        'Join the HCE Venture Studio network. Collaborate with innovators, strategists, and builders to create the next generation of AI-powered ventures.',
-      title: 'Join the Network | HCE Venture Studio',
+        'Join the HCE Studio network. Collaborate with innovators, strategists, and builders to create the next generation of AI-powered ventures.',
+      title: 'Join the Network | HCE Studio',
     },
     title: 'Join Us',
   }

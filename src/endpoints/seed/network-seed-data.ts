@@ -19,7 +19,7 @@ export const simonHolmes = ({ profileImageID }: NetworkArgs) => {
     },
     meta: {
       title: 'Simon Holmes | HCE Network',
-      description: 'Founder & CEO at HCE Venture Studio.',
+      description: 'Founder & CEO at HCE Studio.',
     },
   }
 }
@@ -41,7 +41,7 @@ export const johnDurrant = ({ profileImageID }: NetworkArgs) => {
     },
     meta: {
       title: 'John Durrant | HCE Network',
-      description: 'Network member at HCE Venture Studio.',
+      description: 'Network member at HCE Studio.',
     },
   }
 }
@@ -71,7 +71,7 @@ export const networkMember1 = ({ profileImageID }: NetworkArgs) => {
     meta: {
       title: 'Alex Chen | HCE Network',
       description:
-        'AI/ML Engineer & Venture Partner at HCE Venture Studio. Building ethical AI solutions with 10+ years of experience.',
+        'AI/ML Engineer & Venture Partner at HCE Studio. Building ethical AI solutions with 10+ years of experience.',
     },
   }
 }
