@@ -205,3 +205,26 @@ html[data-theme='light'] {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+
+/* Table styles for Lexical tables */
+@layer components {
+  .prose table {
+    @apply w-full border-collapse my-6;
+  }
+
+  .prose th {
+    @apply border border-border bg-muted px-4 py-2 text-left font-semibold text-foreground;
+  }
+
+  .prose td {
+    @apply border border-border px-4 py-2 text-foreground;
+  }
+
+  .prose thead {
+    @apply bg-muted/50;
+  }
+
+  .prose tbody tr:hover {
+    @apply bg-muted/30;
+  }
+}

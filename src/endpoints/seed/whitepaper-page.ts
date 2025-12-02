@@ -64,6 +64,74 @@ export const whitepaperPage: (args: WhitepaperArgs) => RequiredDataFromCollectio
         },
       },
     },
+    whitepaperContent: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Introduction',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'We stand at a pivotal moment in human history. The convergence of artificial intelligence, automation, and digital platforms is fundamentally reshaping how we create, build, and scale businesses.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 1,
+                mode: 'normal',
+                style: '',
+                text: 'This is placeholder content. You can add the full whitepaper content through the admin panel at /admin.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
     layout: [
       {
         blockName: 'Introduction',

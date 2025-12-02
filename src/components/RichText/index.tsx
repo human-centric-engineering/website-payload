@@ -3,6 +3,7 @@ import {
   DefaultNodeTypes,
   SerializedBlockNode,
   SerializedLinkNode,
+  SerializedHeadingNode,
   type DefaultTypedEditorState,
 } from '@payloadcms/richtext-lexical'
 import {
@@ -21,10 +22,42 @@ import type {
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { cn } from '@/utilities/ui'
+import React from 'react'
 
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+
+/**
+ * Slugify text to create URL-safe anchor IDs
+ */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+/**
+ * Extract text content from a Lexical node
+ */
+function extractTextFromNode(node: any): string {
+  if (typeof node === 'string') {
+    return node
+  }
+
+  if (node?.text) {
+    return node.text
+  }
+
+  if (node?.children && Array.isArray(node.children)) {
+    return node.children.map(extractTextFromNode).join('')
+  }
+
+  return ''
+}
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -38,6 +71,21 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  heading: ({ node, nodesToJSX }: { node: SerializedHeadingNode; nodesToJSX: any }) => {
+    // Extract text from all children nodes
+    const text = node.children?.map(extractTextFromNode).join('') || ''
+    const id = slugify(text)
+    const Tag = node.tag
+
+    return React.createElement(
+      Tag,
+      {
+        id,
+        className: 'scroll-mt-24',
+      },
+      nodesToJSX({ nodes: node.children }),
+    )
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
