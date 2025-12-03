@@ -14,6 +14,8 @@ import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
 import { profileSimonHolmes } from './profile-simon-holmes'
 import { profileJohnDurrant } from './profile-john-durrant'
+import { imageWhitepaperMindDashboard } from './image-whitepaper-mind-dashboard'
+import { imageWhitepaperStudioModel } from './image-whitepaper-studio-model'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
@@ -108,6 +110,8 @@ export const seed = async ({
     hero1Buffer,
     profileSimonBuffer,
     profileJohnBuffer,
+    whitepaperMindDashboardBuffer,
+    whitepaperStudioModelBuffer,
   ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
@@ -123,6 +127,8 @@ export const seed = async ({
     ),
     fetchFileByURL('profile-simon-holmes.webp'),
     fetchFileByURL('profile-john-durrant.webp'),
+    fetchFileByURL('whitepaper-mind-dashboard.png'),
+    fetchFileByURL('whitepaper-studio-model.png'),
   ])
 
   const [
@@ -133,6 +139,8 @@ export const seed = async ({
     imageHomeDoc,
     profileSimonDoc,
     profileJohnDoc,
+    whitepaperMindDashboardDoc,
+    whitepaperStudioModelDoc,
   ] = await Promise.all([
     payload.create({
       collection: 'users',
@@ -171,6 +179,16 @@ export const seed = async ({
       collection: 'media',
       data: profileJohnDurrant,
       file: profileJohnBuffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageWhitepaperMindDashboard,
+      file: whitepaperMindDashboardBuffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageWhitepaperStudioModel,
+      file: whitepaperStudioModelBuffer,
     }),
     categories.map((category) =>
       payload.create({
@@ -279,7 +297,11 @@ export const seed = async ({
       payload.create({
         collection: 'pages',
         depth: 0,
-        data: whitepaperPage({ heroImage: imageHomeDoc }),
+        data: whitepaperPage({
+          heroImage: imageHomeDoc,
+          mindDashboardImage: whitepaperMindDashboardDoc,
+          studioModelImage: whitepaperStudioModelDoc,
+        }),
       }),
     ])
 
