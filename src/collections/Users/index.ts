@@ -16,6 +16,7 @@ export const Users: CollectionConfig = {
     useAsTitle: 'name',
   },
   auth: {
+    verify: false, // Disabled for admin-only site (only 2 users)
     forgotPassword: {
       generateEmailHTML: ({ token }) => {
         const resetURL = `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/reset/${token}`
@@ -42,31 +43,6 @@ export const Users: CollectionConfig = {
       `
       },
       generateEmailSubject: () => 'Reset your password - HCE Venture Studio',
-    },
-    verify: {
-      generateEmailHTML: ({ token }) => {
-        const verifyURL = `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/verify/${token}`
-        return `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2>Verify Your Email Address</h2>
-          <p>Thank you for creating an account with HCE Venture Studio.</p>
-          <p>Please click the button below to verify your email address:</p>
-          <p style="margin: 30px 0;">
-            <a href="${verifyURL}"
-               style="background-color: #0070f3; color: white; padding: 12px 24px;
-                      text-decoration: none; border-radius: 5px; display: inline-block;">
-              Verify Email Address
-            </a>
-          </p>
-          <p style="color: #666; font-size: 14px;">
-            If the button doesn't work, copy and paste this link:<br/>
-            ${verifyURL}
-          </p>
-          <p style="color: #666; font-size: 14px;">This link expires in 24 hours.</p>
-        </div>
-      `
-      },
-      generateEmailSubject: () => 'Verify your email - HCE Venture Studio',
     },
   },
   fields: [
