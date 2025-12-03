@@ -18,7 +18,8 @@ export const Users: CollectionConfig = {
   auth: {
     verify: false, // Disabled for admin-only site (only 2 users)
     forgotPassword: {
-      generateEmailHTML: ({ token }) => {
+      generateEmailHTML: (args) => {
+        const token = args?.token || ''
         const resetURL = `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/reset/${token}`
         return `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
