@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -75,6 +76,11 @@ export default buildConfig({
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
+  email: resendAdapter({
+    defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'noreply@humancentricengineering.com',
+    defaultFromName: process.env.EMAIL_FROM_NAME || 'HCE Venture Studio',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
