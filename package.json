@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.64.0",
+    "@payloadcms/db-postgres": "3.64.0",
+    "@payloadcms/email-resend": "^3.64.0",
     "@payloadcms/live-preview-react": "3.64.0",
     "@payloadcms/next": "3.64.0",
     "@payloadcms/plugin-form-builder": "3.64.0",
@@ -52,8 +54,7 @@
     "react-hook-form": "7.45.4",
     "sharp": "0.34.2",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "@payloadcms/db-postgres": "3.64.0"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
