@@ -203,6 +203,12 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding posts...`)
 
+  /*
+   * POSTS SEEDING DISABLED
+   * Posts are currently not used on the website.
+   * To re-enable: Remove the opening and closing comment delimiters.
+   */
+  /*
   // Do not create posts with `Promise.all` because we want the posts to be created in order
   // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
   const post1Doc = await payload.create({
@@ -254,6 +260,7 @@ export const seed = async ({
       relatedPosts: [post1Doc.id, post2Doc.id],
     },
   })
+  */
 
   payload.logger.info(`— Seeding forms...`)
 
