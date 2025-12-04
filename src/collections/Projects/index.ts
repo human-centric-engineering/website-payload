@@ -105,6 +105,10 @@ export const Projects: CollectionConfig<'projects'> = {
           label: 'In Development',
           value: 'in-development',
         },
+        {
+          label: 'Proof of Concept',
+          value: 'proof-of-concept',
+        },
       ],
       admin: {
         position: 'sidebar',
