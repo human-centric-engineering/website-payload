@@ -77,8 +77,8 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   email: resendAdapter({
-    defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'noreply@humancentricengineering.com',
-    defaultFromName: process.env.EMAIL_FROM_NAME || 'HCE Venture Studio',
+    defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'no-reply@notifications.hce.studio',
+    defaultFromName: process.env.EMAIL_FROM_NAME || 'HCE Studio',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
   typescript: {

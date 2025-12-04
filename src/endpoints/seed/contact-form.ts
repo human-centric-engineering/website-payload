@@ -55,7 +55,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
   emails: [
     // Acknowledgement email to the sender
     {
-      emailFrom: '"HCE Venture Studio" <noreply@humancentricengineering.com>',
+      emailFrom: '"HCE Studio" <no-reply@notifications.hce.studio>',
       emailTo: '{{email}}',
       message: {
         root: {
@@ -148,7 +148,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
     // Notification email to you with enquiry details
     {
-      emailFrom: '"HCE Venture Studio" <noreply@humancentricengineering.com>',
+      emailFrom: '"HCE Studio" <no-reply@notifications.hce.studio>',
       emailTo: 'simon@humancentricengineering.com',
       message: {
         root: {

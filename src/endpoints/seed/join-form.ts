@@ -54,7 +54,7 @@ export const joinForm: RequiredDataFromCollectionSlug<'forms'> = {
   emails: [
     // Acknowledgement email to the applicant
     {
-      emailFrom: '"HCE Venture Studio" <noreply@humancentricengineering.com>',
+      emailFrom: '"HCE Studio" <no-reply@notifications.hce.studio>',
       emailTo: '{{email}}',
       message: {
         root: {
@@ -147,7 +147,7 @@ export const joinForm: RequiredDataFromCollectionSlug<'forms'> = {
     },
     // Notification email to you with application details
     {
-      emailFrom: '"HCE Venture Studio" <noreply@humancentricengineering.com>',
+      emailFrom: '"HCE Studio" <no-reply@notifications.hce.studio>',
       emailTo: 'simon@humancentricengineering.com',
       message: {
         root: {
