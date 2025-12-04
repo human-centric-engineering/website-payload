@@ -31,30 +31,30 @@ This CLAUDE.md provides quick reference; `.context/` provides deep technical con
 ## Development Commands
 
 ### Core Development
-- `pnpm dev` - Start development server on http://localhost:3000
-- `pnpm build` - Build for production (includes Next.js build + sitemap generation)
-- `pnpm start` - Start production server
-- `pnpm dev:prod` - Clean build and start in production mode
+- `npm run dev` - Start development server on http://localhost:3000
+- `npm run build` - Build for production (includes Next.js build + sitemap generation)
+- `npm start` - Start production server
+- `npm run dev:prod` - Clean build and start in production mode
 
 ### Code Quality
-- `pnpm lint` - Run ESLint
-- `pnpm lint:fix` - Fix ESLint errors automatically
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors automatically
 
 ### Testing
-- `pnpm test` - Run all tests (integration + e2e)
-- `pnpm test:int` - Run integration tests with Vitest
-- `pnpm test:e2e` - Run e2e tests with Playwright
+- `npm test` - Run all tests (integration + e2e)
+- `npm run test:int` - Run integration tests with Vitest
+- `npm run test:e2e` - Run e2e tests with Playwright
 - Integration tests: Located in `tests/int/**/*.int.spec.ts`, run with Vitest + jsdom
 - E2E tests: Located in `tests/e2e/`, run with Playwright (auto-starts dev server)
 
 ### Payload CMS Commands
-- `pnpm payload` - Access Payload CLI
-- `pnpm generate:types` - Generate TypeScript types from Payload schema to `src/payload-types.ts`
-- `pnpm generate:importmap` - Generate import map for admin panel components
+- `npm run payload` - Access Payload CLI
+- `npm run generate:types` - Generate TypeScript types from Payload schema to `src/payload-types.ts`
+- `npm run generate:importmap` - Generate import map for admin panel components
 
 ### Database (PostgreSQL)
-- `pnpm payload migrate:create` - Create a new migration file
-- `pnpm payload migrate` - Run pending migrations (required before production start)
+- `npm run payload migrate:create` - Create a new migration file
+- `npm run payload migrate` - Run pending migrations (required before production start)
 - Local dev uses `push: true` by default - schema changes apply automatically without migrations
 - Production requires explicit migrations to avoid data loss
 
@@ -158,7 +158,7 @@ Located in `src/utilities/`:
 
 - Generated types: `src/payload-types.ts` (auto-generated from Payload schema)
 - TypeScript paths configured with `@/*` alias pointing to `src/*`
-- Always regenerate types after schema changes: `pnpm generate:types`
+- Always regenerate types after schema changes: `npm run generate:types`
 
 ### Environment Variables
 
@@ -184,9 +184,9 @@ Next.js caching is **disabled by default** (for Payload Cloud compatibility). To
 
 **Production:**
 1. Set `push: false` in `payload.config.ts`
-2. Create migration: `pnpm payload migrate:create`
+2. Create migration: `npm run payload migrate:create`
 3. Commit migration files
-4. Deploy and run: `pnpm payload migrate` before `pnpm start`
+4. Deploy and run: `npm run payload migrate` before `npm start`
 
 ### Docker Support
 
@@ -196,9 +196,9 @@ Next.js caching is **disabled by default** (for Payload Cloud compatibility). To
 
 ## Important Notes
 
-- **Import map:** Regenerate after adding admin components: `pnpm generate:importmap`
+- **Import map:** Regenerate after adding admin components: `npm run generate:importmap`
 - **Seeding:** Admin panel has "seed database" link (destructive - drops existing data)
 - **Node version:** Requires Node ^18.20.2 or >=20.9.0
-- **Package manager:** Use pnpm (version ^9 or ^10)
+- **Package manager:** Using npm (project originally used pnpm)
 - **Image processing:** Uses Sharp for resize/transforms
 - **Jobs queue:** Handles scheduled publishing via cron (may be limited on Vercel)
