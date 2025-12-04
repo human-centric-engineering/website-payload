@@ -821,7 +821,7 @@ export interface Project {
   id: number;
   title: string;
   projectType: 'venture' | 'agency';
-  projectStatus: 'active' | 'completed' | 'in-development';
+  projectStatus: 'active' | 'completed' | 'in-development' | 'proof-of-concept';
   heroImage: number | Media;
   /**
    * Brief project description for listing pages
