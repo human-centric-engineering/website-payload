@@ -13,6 +13,8 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Media } from '@/components/Media'
+import { Badge } from '@/components/ui/badge'
+import { getProjectTypeLabel, getProjectStatusLabel } from '@/utilities/projectLabels'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -68,12 +70,10 @@ export default async function Project({ params: paramsPromise }: Args) {
       {/* Header */}
       <div className="container mb-12">
         <div className="max-w-[48rem] mx-auto">
-          <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-            <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">
-              {project.projectType === 'venture' ? 'Venture Studio' : 'Agency Work'}
-            </span>
+          <div className="flex items-center gap-3 mb-4">
+            <Badge variant="default">{getProjectTypeLabel(project.projectType)}</Badge>
             {project.projectStatus && (
-              <span className="capitalize">{project.projectStatus.replace('-', ' ')}</span>
+              <Badge variant="secondary">{getProjectStatusLabel(project.projectStatus)}</Badge>
             )}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">{project.title}</h1>

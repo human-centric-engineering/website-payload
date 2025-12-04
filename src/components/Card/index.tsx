@@ -7,8 +7,12 @@ import React, { Fragment } from 'react'
 import type { Post, Project } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import { Badge } from '@/components/ui/badge'
+import { getProjectTypeLabel, getProjectStatusLabel } from '@/utilities/projectLabels'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'> | Pick<Project, 'slug' | 'meta' | 'title'>
+export type CardPostData =
+  | Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+  | Pick<Project, 'slug' | 'meta' | 'title' | 'projectType' | 'projectStatus'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -34,6 +38,7 @@ export const Card: React.FC<{
     <article
       className={cn(
         'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'flex flex-col',
         className,
       )}
       ref={card.ref}
@@ -42,7 +47,7 @@ export const Card: React.FC<{
         {!metaImage && <div className="">No image</div>}
         {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         {showCategories && hasCategories && (
           <div className="uppercase text-sm mb-4">
             {showCategories && hasCategories && (
@@ -79,6 +84,16 @@ export const Card: React.FC<{
           </div>
         )}
         {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+
+        {/* Project Tags - bottom aligned */}
+        {relationTo === 'projects' && doc && 'projectType' in doc && (
+          <div className="flex flex-wrap gap-2 mt-auto pt-4">
+            <Badge variant="default">{getProjectTypeLabel(doc.projectType)}</Badge>
+            {doc.projectStatus && (
+              <Badge variant="secondary">{getProjectStatusLabel(doc.projectStatus)}</Badge>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
