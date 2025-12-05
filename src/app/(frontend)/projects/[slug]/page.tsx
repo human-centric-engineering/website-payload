@@ -82,7 +82,7 @@ export default async function Project({ params: paramsPromise }: Args) {
           {/* Right Column - Image */}
           {project.heroImage && typeof project.heroImage === 'object' && (
             <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden order-1 lg:order-2">
-              <Media resource={project.heroImage} className="object-cover" fill priority />
+              <Media resource={project.heroImage} imgClassName="object-cover" fill priority />
             </div>
           )}
         </div>
