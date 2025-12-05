@@ -17,6 +17,8 @@ import { profileJohnDurrant } from './profile-john-durrant'
 import { imageWhitepaperMindDashboard } from './image-whitepaper-mind-dashboard'
 import { imageWhitepaperStudioModel } from './image-whitepaper-studio-model'
 import { imageProjectShotTracer } from './image-project-shot-tracer'
+import { imageProjectLeaderboard } from './image-project-leaderboard'
+import { imageProjectOrdinaryMastery } from './image-project-ordinary-mastery'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
@@ -114,6 +116,8 @@ export const seed = async ({
     whitepaperMindDashboardBuffer,
     whitepaperStudioModelBuffer,
     projectShotTracerBuffer,
+    projectLeaderboardBuffer,
+    projectOrdinaryMasteryBuffer,
   ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
@@ -132,6 +136,8 @@ export const seed = async ({
     fetchFileByURL('whitepaper-mind-dashboard.png'),
     fetchFileByURL('whitepaper-studio-model.png'),
     fetchFileByURL('project-shot-tracer.png'),
+    fetchFileByURL('project-leaderboard.jpeg'),
+    fetchFileByURL('project-ordinary-mastery.png'),
   ])
 
   const [
@@ -145,6 +151,8 @@ export const seed = async ({
     whitepaperMindDashboardDoc,
     whitepaperStudioModelDoc,
     projectShotTracerDoc,
+    projectLeaderboardDoc,
+    projectOrdinaryMasteryDoc,
   ] = await Promise.all([
     payload.create({
       collection: 'users',
@@ -198,6 +206,16 @@ export const seed = async ({
       collection: 'media',
       data: imageProjectShotTracer,
       file: projectShotTracerBuffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageProjectLeaderboard,
+      file: projectLeaderboardBuffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageProjectOrdinaryMastery,
+      file: projectOrdinaryMasteryBuffer,
     }),
     categories.map((category) =>
       payload.create({
@@ -331,7 +349,7 @@ export const seed = async ({
     context: {
       disableRevalidate: true,
     },
-    data: agencyProject1({ heroImageID: image1Doc.id }) as any,
+    data: agencyProject1({ heroImageID: projectLeaderboardDoc.id }) as any,
   })
 
   await payload.create({
@@ -349,7 +367,7 @@ export const seed = async ({
     context: {
       disableRevalidate: true,
     },
-    data: ventureProject1({ heroImageID: imageHomeDoc.id }) as any,
+    data: ventureProject1({ heroImageID: projectOrdinaryMasteryDoc.id }) as any,
   })
 
   payload.logger.info(`— Seeding network...`)
