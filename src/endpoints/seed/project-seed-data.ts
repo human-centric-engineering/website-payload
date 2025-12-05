@@ -2,262 +2,16 @@ type ProjectArgs = {
   heroImageID: number
 }
 
-export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
-  return {
-    slug: 'ai-market-research-platform',
-    _status: 'published' as const,
-    title: 'AI-Powered Market Research Platform',
-    projectType: 'venture' as const,
-    projectStatus: 'in-development' as const,
-    heroImage: heroImageID,
-    excerpt:
-      'An intelligent platform that democratises market research by combining AI analysis with human insight, making sophisticated market intelligence accessible to startups and SMEs.',
-    content: {
-      root: {
-        type: 'root',
-        children: [
-          {
-            type: 'heading',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Reimagining Market Research',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            tag: 'h2',
-            version: 1,
-          },
-          {
-            type: 'paragraph',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Traditional market research is expensive, time-consuming, and often inaccessible to smaller organisations. Our AI-powered platform changes that by combining automated data gathering, intelligent analysis, and expert validation to deliver actionable insights at a fraction of the traditional cost.',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            textFormat: 0,
-            textStyle: '',
-            version: 1,
-          },
-          {
-            type: 'heading',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Key Features',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            tag: 'h2',
-            version: 1,
-          },
-          {
-            type: 'list',
-            listType: 'bullet',
-            tag: 'ul',
-            children: [
-              {
-                type: 'listitem',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'Automated data collection from multiple sources',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-                value: 1,
-              },
-              {
-                type: 'listitem',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'AI-driven analysis and trend identification',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-                value: 2,
-              },
-              {
-                type: 'listitem',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'Expert validation and contextualisation',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-                value: 3,
-              },
-              {
-                type: 'listitem',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'Interactive dashboards and reporting',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-                value: 4,
-              },
-              {
-                type: 'listitem',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'Collaborative workspace for teams',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-                value: 5,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            version: 1,
-          },
-          {
-            type: 'heading',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Current Status',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            tag: 'h2',
-            version: 1,
-          },
-          {
-            type: 'paragraph',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Currently in development with pilot customers providing feedback. Expected beta launch in Q2 2026.',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            textFormat: 0,
-            textStyle: '',
-            version: 1,
-          },
-        ],
-        direction: 'ltr',
-        format: '',
-        indent: 0,
-        version: 1,
-      },
-    },
-    technologies: [
-      { tech: 'Next.js' },
-      { tech: 'Python' },
-      { tech: 'TensorFlow' },
-      { tech: 'PostgreSQL' },
-      { tech: 'Redis' },
-      { tech: 'OpenAI API' },
-    ],
-    links: {
-      website: 'https://example.com/market-research',
-      caseStudy: '',
-      repository: '',
-    },
-    meta: {
-      title: 'AI-Powered Market Research Platform | HCE Studio',
-      description:
-        'Democratising market research through AI analysis and human insight. Making sophisticated market intelligence accessible to startups and SMEs.',
-      image: heroImageID,
-    },
-  }
-}
-
 export const agencyProject1 = ({ heroImageID }: ProjectArgs) => {
   return {
-    slug: 'enterprise-crm-modernisation',
+    slug: 'golf-leaderboard',
     _status: 'published' as const,
-    title: 'Enterprise CRM Modernisation',
+    title: 'Realtime leaderboard for international golf events',
     projectType: 'agency' as const,
     projectStatus: 'completed' as const,
     heroImage: heroImageID,
     excerpt:
-      'Complete overhaul of a legacy CRM system for a multinational professional services firm, improving user experience and operational efficiency whilst maintaining critical business processes.',
+      'Processing real-time data feeds to display invidivdual and team leaderboards on the course and in hospitality',
     content: {
       root: {
         type: 'root',
@@ -472,23 +226,16 @@ export const agencyProject1 = ({ heroImageID }: ProjectArgs) => {
         version: 1,
       },
     },
-    technologies: [
-      { tech: 'React' },
-      { tech: 'Node.js' },
-      { tech: 'Microsoft SQL Server' },
-      { tech: 'Azure' },
-      { tech: 'Power BI' },
-      { tech: 'Microsoft Graph API' },
-    ],
+    technologies: [{ tech: 'React' }, { tech: 'Vite' }, { tech: 'Tailwind' }, { tech: 'Render' }],
     links: {
       website: '',
       caseStudy: 'https://example.com/case-studies/crm-modernisation',
       repository: '',
     },
     meta: {
-      title: 'Enterprise CRM Modernisation Case Study | HCE',
+      title: 'Realtime leaderboard for international golf events | HCE Studio',
       description:
-        'Complete overhaul of a legacy CRM system for a multinational professional services firm, improving efficiency and user adoption.',
+        'Processing real-time data feeds to display invidivdual and team leaderboards on the course and in hospitality',
       image: heroImageID,
     },
   }
@@ -496,14 +243,14 @@ export const agencyProject1 = ({ heroImageID }: ProjectArgs) => {
 
 export const agencyProject2 = ({ heroImageID }: ProjectArgs) => {
   return {
-    slug: 'sustainable-ecommerce-platform',
+    slug: 'dynamic-golf-shot-tracer-poc',
     _status: 'published' as const,
-    title: 'Sustainable Fashion E-Commerce Platform',
+    title: 'Dynamic golf shot tracer',
     projectType: 'agency' as const,
-    projectStatus: 'active' as const,
+    projectStatus: 'proof-of-concept' as const,
     heroImage: heroImageID,
     excerpt:
-      'A purpose-built e-commerce platform for an ethical fashion brand, designed to showcase sustainability credentials and tell the story behind each product whilst delivering a seamless shopping experience.',
+      'Tracing the tee-shot arcs of a golf tournament, with a custom AI Dynamic Director choosing the shots and holes to display',
     content: {
       root: {
         type: 'root',
@@ -739,12 +486,12 @@ export const agencyProject2 = ({ heroImageID }: ProjectArgs) => {
       },
     },
     technologies: [
-      { tech: 'Next.js' },
-      { tech: 'Shopify' },
-      { tech: 'Payload CMS' },
-      { tech: 'Stripe' },
-      { tech: 'Vercel' },
-      { tech: 'Algolia' },
+      { tech: 'React' },
+      { tech: 'Three.js' },
+      { tech: 'Node' },
+      { tech: 'Express' },
+      { tech: 'PostgreSQL' },
+      { tech: 'Render' },
     ],
     links: {
       website: 'https://example.com/sustainable-fashion',
@@ -752,9 +499,248 @@ export const agencyProject2 = ({ heroImageID }: ProjectArgs) => {
       repository: '',
     },
     meta: {
-      title: 'Sustainable Fashion E-Commerce Platform | HCE',
+      title: 'Dynamic golf shot tracer | HCE Studio',
       description:
-        'A purpose-built e-commerce platform showcasing sustainability credentials and ethical production whilst delivering seamless shopping.',
+        'Tracing the tee-shot arcs of a golf tournament, with a custom AI Dynamic Director choosing the shots and holes to display',
+      image: heroImageID,
+    },
+  }
+}
+
+export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
+  return {
+    slug: 'ordinary-mastery-platform',
+    _status: 'published' as const,
+    title: 'Ordinary Mastery Platform',
+    projectType: 'venture' as const,
+    projectStatus: 'in-development' as const,
+    heroImage: heroImageID,
+    excerpt:
+      "An intelligent platform that helps you learn new skills and build the habits you've always wanted to",
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Reimagining personal growth',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Traditional market research is expensive, time-consuming, and often inaccessible to smaller organisations. Our AI-powered platform changes that by combining automated data gathering, intelligent analysis, and expert validation to deliver actionable insights at a fraction of the traditional cost.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            textStyle: '',
+            version: 1,
+          },
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Key Features',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'list',
+            listType: 'bullet',
+            tag: 'ul',
+            children: [
+              {
+                type: 'listitem',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'Automated data collection from multiple sources',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+                value: 1,
+              },
+              {
+                type: 'listitem',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'AI-driven analysis and trend identification',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+                value: 2,
+              },
+              {
+                type: 'listitem',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'Expert validation and contextualisation',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+                value: 3,
+              },
+              {
+                type: 'listitem',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'Interactive dashboards and reporting',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+                value: 4,
+              },
+              {
+                type: 'listitem',
+                children: [
+                  {
+                    type: 'text',
+                    detail: 0,
+                    format: 0,
+                    mode: 'normal',
+                    style: '',
+                    text: 'Collaborative workspace for teams',
+                    version: 1,
+                  },
+                ],
+                direction: 'ltr',
+                format: '',
+                indent: 0,
+                version: 1,
+                value: 5,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            version: 1,
+          },
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Current Status',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Currently in development with pilot customers providing feedback. Expected beta launch in Q2 2026.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            textStyle: '',
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    technologies: [{ tech: 'Helix CMS' }, { tech: 'MySQL' }],
+    links: {
+      website: 'https://ordinarymastery.com',
+      caseStudy: '',
+      repository: '',
+    },
+    meta: {
+      title: 'Ordinary Mastery Platform | HCE Studio',
+      description:
+        "An intelligent platform that helps you learn new skills and build the habits you've always wanted to",
       image: heroImageID,
     },
   }
