@@ -131,13 +131,27 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
     ),
-    fetchFileByURL('profile-simon-holmes.webp'),
-    fetchFileByURL('profile-john-durrant.webp'),
-    fetchFileByURL('whitepaper-mind-dashboard.png'),
-    fetchFileByURL('whitepaper-studio-model.png'),
-    fetchFileByURL('project-shot-tracer.png'),
-    fetchFileByURL('project-leaderboard.jpeg'),
-    fetchFileByURL('project-ordinary-mastery.png'),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/profile-simon-holmes.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/profile-john-durrant.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/whitepaper-mind-dashboard.png',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/whitepaper-studio-model.png',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/project-shot-tracer.png',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/project-leaderboard.jpeg',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/human-centric-engineering/website-payload/main/src/endpoints/seed/project-ordinary-mastery.png',
+    ),
   ])
 
   const [
