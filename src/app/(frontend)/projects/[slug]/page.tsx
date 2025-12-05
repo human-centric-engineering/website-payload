@@ -52,7 +52,7 @@ export default async function Project({ params: paramsPromise }: Args) {
   if (!project) return <PayloadRedirects url={url} />
 
   return (
-    <article className="pt-16 pb-16">
+    <article className="pb-16">
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
