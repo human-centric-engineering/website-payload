@@ -314,32 +314,34 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding projects...`)
 
-  await Promise.all([
-    payload.create({
-      collection: 'projects',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: ventureProject1({ heroImageID: imageHomeDoc.id }) as any,
-    }),
-    payload.create({
-      collection: 'projects',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: agencyProject1({ heroImageID: image1Doc.id }) as any,
-    }),
-    payload.create({
-      collection: 'projects',
-      depth: 0,
-      context: {
-        disableRevalidate: true,
-      },
-      data: agencyProject2({ heroImageID: image2Doc.id }) as any,
-    }),
-  ])
+  // Do not create projects with `Promise.all` because we want them to be created in order
+  // This way we can sort them by `createdAt` and they will be in the expected order
+  await payload.create({
+    collection: 'projects',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: agencyProject1({ heroImageID: image1Doc.id }) as any,
+  })
+
+  await payload.create({
+    collection: 'projects',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: agencyProject2({ heroImageID: image2Doc.id }) as any,
+  })
+
+  await payload.create({
+    collection: 'projects',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: ventureProject1({ heroImageID: imageHomeDoc.id }) as any,
+  })
 
   payload.logger.info(`— Seeding network...`)
 

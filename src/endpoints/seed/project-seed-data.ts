@@ -731,7 +731,13 @@ export const ventureProject1 = ({ heroImageID }: ProjectArgs) => {
         version: 1,
       },
     },
-    technologies: [{ tech: 'Helix CMS' }, { tech: 'MySQL' }],
+    technologies: [
+      { tech: 'Helix CMS' },
+      { tech: 'MySQL' },
+      { tech: 'Laravel' },
+      { tech: 'Vue' },
+      { tech: 'Tailwind' },
+    ],
     links: {
       website: 'https://ordinarymastery.com',
       caseStudy: '',
