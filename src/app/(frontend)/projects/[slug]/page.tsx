@@ -60,24 +60,31 @@ export default async function Project({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      {/* Hero Image */}
-      {project.heroImage && typeof project.heroImage === 'object' && (
-        <div className="relative w-full h-[400px] mb-12">
-          <Media resource={project.heroImage} className="object-cover" fill priority />
-        </div>
-      )}
-
-      {/* Header */}
-      <div className="container mb-12">
-        <div className="max-w-[48rem] mx-auto">
-          <div className="flex items-center gap-3 mb-4">
-            <Badge variant="default">{getProjectTypeLabel(project.projectType)}</Badge>
-            {project.projectStatus && (
-              <Badge variant="secondary">{getProjectStatusLabel(project.projectStatus)}</Badge>
+      {/* Hero Section - Two Column Layout */}
+      <div className="container pt-16 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Content */}
+          <div className="order-2 lg:order-1">
+            <div className="flex items-center gap-3 mb-6">
+              <Badge variant="default">{getProjectTypeLabel(project.projectType)}</Badge>
+              {project.projectStatus && (
+                <Badge variant="secondary">{getProjectStatusLabel(project.projectStatus)}</Badge>
+              )}
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{project.title}</h1>
+            {project.excerpt && (
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+                {project.excerpt}
+              </p>
             )}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{project.title}</h1>
-          {project.excerpt && <p className="text-xl text-muted-foreground">{project.excerpt}</p>}
+
+          {/* Right Column - Image */}
+          {project.heroImage && typeof project.heroImage === 'object' && (
+            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden order-1 lg:order-2">
+              <Media resource={project.heroImage} imgClassName="object-cover" fill priority />
+            </div>
+          )}
         </div>
       </div>
 
