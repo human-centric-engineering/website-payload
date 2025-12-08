@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 896px;
+  max-width: 100%;
   margin: 0 auto;
   aspect-ratio: 1;
 }
@@ -9,6 +9,7 @@
   width: 100%;
   height: 100%;
   overflow: visible;
+  max-height: 800px;
 }
 
 .orbit {
@@ -92,19 +93,6 @@
   to {
     opacity: 0.6;
     stroke-width: 1.5;
-  }
-}
-
-/* Responsive sizing */
-@media (max-width: 768px) {
-  .container {
-    max-width: 672px;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    max-width: 576px;
   }
 }
 
