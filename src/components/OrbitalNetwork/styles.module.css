@@ -31,6 +31,27 @@
   transition: opacity 0.2s ease;
 }
 
+/* Orbit-specific dot colors - progressively lighter tints */
+.dot0 {
+  /* Inner tier - full primary color */
+  fill: hsl(var(--primary));
+}
+
+.dot1 {
+  /* Second tier - lighter tint */
+  filter: brightness(1.35);
+}
+
+.dot2 {
+  /* Third tier - even lighter */
+  filter: brightness(1.65);
+}
+
+.dot3 {
+  /* Outer tier - lightest */
+  filter: brightness(1.95);
+}
+
 .dot:hover,
 .dot:focus {
   opacity: 1;

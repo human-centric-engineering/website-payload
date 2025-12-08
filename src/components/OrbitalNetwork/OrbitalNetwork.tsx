@@ -110,6 +110,7 @@ export function OrbitalNetwork() {
   const [connections, setConnections] = useState<Connection[]>([])
   const [isPaused, setIsPaused] = useState(false)
   const [currentTime, setCurrentTime] = useState<number>(0)
+  const [isMounted, setIsMounted] = useState(false)
   const animationStartTime = useRef<number>(Date.now())
   const pauseStartTime = useRef<number | null>(null)
   const totalPausedTime = useRef<number>(0)
@@ -120,9 +121,14 @@ export function OrbitalNetwork() {
     return ORBITS.flatMap((orbit, index) => calculateDotPositions(orbit, index))
   }, [])
 
+  // Set mounted flag after initial render
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   // Animation loop
   useEffect(() => {
-    if (isPaused) return
+    if (!isMounted || isPaused) return
 
     const animate = () => {
       setCurrentTime(Date.now() - animationStartTime.current - totalPausedTime.current)
@@ -136,7 +142,7 @@ export function OrbitalNetwork() {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [isPaused])
+  }, [isMounted, isPaused])
 
   const handleDotEnter = useCallback(
     (dot: Dot) => {
@@ -257,12 +263,14 @@ export function OrbitalNetwork() {
         {/* Animated dots */}
         <g className="dots">
           {allDots.map((dot) => {
-            const pos = getDotPosition(dot, currentTime)
+            // Use static positions until mounted to avoid hydration mismatch
+            const pos = isMounted ? getDotPosition(dot, currentTime) : { x: dot.x, y: dot.y }
+            const orbitClass = styles[`dot${dot.orbitIndex}` as keyof typeof styles] || ''
 
             return (
               <circle
                 key={dot.id}
-                className={styles.dot}
+                className={`${styles.dot} ${orbitClass}`}
                 cx={pos.x}
                 cy={pos.y}
                 r={DOT_RADIUS}
