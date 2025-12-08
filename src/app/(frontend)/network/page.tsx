@@ -9,58 +9,23 @@ export const revalidate = 600
 
 export default async function NetworkPage() {
   return (
-    <div className="min-h-screen bg-gradient-dark">
+    <div className="min-h-screen">
       <div className="container py-24">
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-12rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="space-y-12">
             {/* Header */}
             <div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Building Our Network</h1>
               <p className="text-lg text-muted-foreground">
-                We&apos;re assembling a multi-tiered network of collaborators, each bringing
-                unique expertise and vision to redefine entrepreneurship in the AI age.
+                We&apos;re assembling a multi-tiered network of collaborators, each bringing unique
+                expertise and experience to help us deliver the HCE Studio vision.
               </p>
             </div>
 
-            {/* Network Tiers Explanation */}
-            <div className="space-y-6">
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold mb-2">Tier 1: Core Team</h3>
-                <p className="text-muted-foreground">
-                  Founders and strategic partners working at the heart of the venture studio,
-                  defining vision and driving execution.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold mb-2">Tier 2: Strategic Advisors</h3>
-                <p className="text-muted-foreground">
-                  Experienced mentors and domain experts providing guidance on key strategic
-                  decisions and industry connections.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold mb-2">Tier 3: Active Contributors</h3>
-                <p className="text-muted-foreground">
-                  Specialists and collaborators actively working on projects, bringing technical
-                  expertise and creative solutions.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold mb-2">Tier 4: Extended Network</h3>
-                <p className="text-muted-foreground">
-                  A broader ecosystem of partners, supporters, and innovators who contribute ideas,
-                  feedback, and connections.
-                </p>
-              </div>
-            </div>
-
             {/* LinkedIn CTA */}
-            <div className="border border-border rounded-2xl p-8 bg-card/30 backdrop-blur-sm relative">
+            <div className="border border-border rounded-2xl p-8 bg-card/70 backdrop-blur-sm relative">
               {/* Decorative gradient blur */}
               <div
                 className="absolute w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10"
@@ -69,12 +34,13 @@ export default async function NetworkPage() {
 
               <h2 className="text-2xl font-bold mb-3">Connect With Us</h2>
               <p className="text-muted-foreground mb-6">
-                Interested in what we&apos;re building? Let&apos;s connect on LinkedIn.
+                If you&apos;re interested in what we&apos;re building, let&apos;s connect on
+                LinkedIn.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg">
                   <a
-                    href="https://www.linkedin.com/in/simonrholmes/"
+                    href="https://www.linkedin.com/in/simondholmes/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -89,7 +55,7 @@ export default async function NetworkPage() {
                     Connect with Simon
                   </a>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg">
                   <a
                     href="https://www.linkedin.com/in/john-durrant/"
                     target="_blank"
@@ -111,10 +77,10 @@ export default async function NetworkPage() {
           </div>
 
           {/* Right Column - Orbital Visualization */}
-          <div className="relative flex items-center justify-center w-full">
+          <div className="relative flex justify-center w-full bg-black/90 rounded-lg">
             {/* Background gradient blur */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[150px] pointer-events-none"
               aria-hidden="true"
             />
             <div className="relative z-10 w-full">
