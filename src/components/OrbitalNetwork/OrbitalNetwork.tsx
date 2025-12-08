@@ -282,6 +282,7 @@ export function OrbitalNetwork() {
                 role="button"
                 aria-label={`Network member on tier ${dot.orbitIndex + 1}`}
                 aria-pressed={hoveredDotId === dot.id}
+                suppressHydrationWarning
               />
             )
           })}

@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { OrbitalNetwork } from '@/components/OrbitalNetwork/OrbitalNetwork'
+import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -10,6 +11,7 @@ export const revalidate = 600
 export default async function NetworkPage() {
   return (
     <div className="min-h-screen">
+      <PageClient />
       <div className="container py-24">
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -57,7 +59,7 @@ export default async function NetworkPage() {
                 </Button>
                 <Button asChild size="lg">
                   <a
-                    href="https://www.linkedin.com/in/john-durrant/"
+                    href="https://www.linkedin.com/in/johndurrant/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -80,7 +82,7 @@ export default async function NetworkPage() {
           <div className="relative flex justify-center w-full bg-black/90 rounded-lg">
             {/* Background gradient blur */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[150px] pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] pointer-events-none"
               aria-hidden="true"
             />
             <div className="relative z-10 w-full">
