@@ -14,8 +14,9 @@ const ORBITS: OrbitConfig[] = [
   { radius: 340, dotCount: 15 },
 ]
 const DOT_RADIUS = 6
-const NUCLEUS_RADIUS = 12
+const NUCLEUS_RADIUS = 24
 const ORBIT_DURATIONS = [20, 36, 52, 68] // seconds per orbit
+const ELLIPSE_RATIO = 0.6 // ry = rx * 0.6 for ~40° perspective
 
 // Utility functions
 function shuffleArray<T>(array: T[]): T[] {
@@ -29,6 +30,8 @@ function shuffleArray<T>(array: T[]): T[] {
 
 function calculateDotPositions(orbitConfig: OrbitConfig, orbitIndex: number): Dot[] {
   const { radius, dotCount } = orbitConfig
+  const rx = radius
+  const ry = radius * ELLIPSE_RATIO
   const angleStep = (2 * Math.PI) / dotCount
   const dots: Dot[] = []
 
@@ -36,8 +39,8 @@ function calculateDotPositions(orbitConfig: OrbitConfig, orbitIndex: number): Do
     const angle = i * angleStep
     dots.push({
       id: `orbit-${orbitIndex}-dot-${i}`,
-      x: CENTER_X + radius * Math.cos(angle),
-      y: CENTER_Y + radius * Math.sin(angle),
+      x: CENTER_X + rx * Math.cos(angle),
+      y: CENTER_Y + ry * Math.sin(angle),
       angle: angle * (180 / Math.PI),
       orbitIndex,
     })
@@ -57,11 +60,26 @@ function selectConnectionTargets(hoveredDot: Dot, allDots: Dot[]): Dot[] {
   return shuffleArray(eligible).slice(0, count)
 }
 
+function getDotPosition(dot: Dot, elapsedMs: number): { x: number; y: number } {
+  const orbit = ORBITS[dot.orbitIndex]
+  const duration = ORBIT_DURATIONS[dot.orbitIndex] * 1000 // ms
+  const progress = (elapsedMs % duration) / duration // 0-1
+  const currentAngle = dot.angle * (Math.PI / 180) + progress * 2 * Math.PI
+
+  const rx = orbit.radius
+  const ry = orbit.radius * ELLIPSE_RATIO
+
+  return {
+    x: CENTER_X + rx * Math.cos(currentAngle),
+    y: CENTER_Y + ry * Math.sin(currentAngle),
+  }
+}
+
 function getRotatedPosition(
   dot: Dot,
   orbitIndex: number,
   startTime: number | null,
-  totalPausedTime: number
+  totalPausedTime: number,
 ): { x: number; y: number } {
   if (startTime === null) {
     return { x: dot.x, y: dot.y }
@@ -71,15 +89,18 @@ function getRotatedPosition(
   const now = Date.now()
   const elapsed = (now - startTime - totalPausedTime) / 1000 // seconds
   const duration = ORBIT_DURATIONS[orbitIndex]
-  const rotationAngle = ((elapsed % duration) / duration) * 360 // degrees
+  const progress = (elapsed % duration) / duration // 0-1
 
-  // Apply rotation transform around center point
-  const angleRad = (rotationAngle * Math.PI) / 180
-  const dx = dot.x - CENTER_X
-  const dy = dot.y - CENTER_Y
+  // Add the dot's initial angle to the rotation progress
+  const currentAngle = dot.angle * (Math.PI / 180) + progress * 2 * Math.PI
 
-  const rotatedX = CENTER_X + dx * Math.cos(angleRad) - dy * Math.sin(angleRad)
-  const rotatedY = CENTER_Y + dx * Math.sin(angleRad) + dy * Math.cos(angleRad)
+  const orbit = ORBITS[orbitIndex]
+  const rx = orbit.radius
+  const ry = orbit.radius * ELLIPSE_RATIO
+
+  // Calculate position on ellipse at current angle
+  const rotatedX = CENTER_X + rx * Math.cos(currentAngle)
+  const rotatedY = CENTER_Y + ry * Math.sin(currentAngle)
 
   return { x: rotatedX, y: rotatedY }
 }
@@ -88,14 +109,34 @@ export function OrbitalNetwork() {
   const [hoveredDotId, setHoveredDotId] = useState<string | null>(null)
   const [connections, setConnections] = useState<Connection[]>([])
   const [isPaused, setIsPaused] = useState(false)
+  const [currentTime, setCurrentTime] = useState<number>(0)
   const animationStartTime = useRef<number>(Date.now())
   const pauseStartTime = useRef<number | null>(null)
   const totalPausedTime = useRef<number>(0)
+  const animationFrameRef = useRef<number>()
 
   // Pre-calculate all dot positions
   const allDots = useMemo(() => {
     return ORBITS.flatMap((orbit, index) => calculateDotPositions(orbit, index))
   }, [])
+
+  // Animation loop
+  useEffect(() => {
+    if (isPaused) return
+
+    const animate = () => {
+      setCurrentTime(Date.now() - animationStartTime.current - totalPausedTime.current)
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+
+    animationFrameRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [isPaused])
 
   const handleDotEnter = useCallback(
     (dot: Dot) => {
@@ -106,12 +147,22 @@ export function OrbitalNetwork() {
       setIsPaused(true)
 
       // Get current rotated position of the hovered dot (accounting for total paused time)
-      const hoveredPos = getRotatedPosition(dot, dot.orbitIndex, animationStartTime.current, totalPausedTime.current)
+      const hoveredPos = getRotatedPosition(
+        dot,
+        dot.orbitIndex,
+        animationStartTime.current,
+        totalPausedTime.current,
+      )
 
       // Select random dots to connect to
       const targets = selectConnectionTargets(dot, allDots)
       const newConnections = targets.map((target) => {
-        const targetPos = getRotatedPosition(target, target.orbitIndex, animationStartTime.current, totalPausedTime.current)
+        const targetPos = getRotatedPosition(
+          target,
+          target.orbitIndex,
+          animationStartTime.current,
+          totalPausedTime.current,
+        )
         return {
           from: { ...dot, x: hoveredPos.x, y: hoveredPos.y },
           to: { ...target, x: targetPos.x, y: targetPos.y },
@@ -155,23 +206,24 @@ export function OrbitalNetwork() {
         aria-labelledby="network-title"
         aria-describedby="network-desc"
       >
-        <title id="network-title">
+        {/* <title id="network-title">
           Interactive visualization of HCE Venture Studio&apos;s multi-tiered network
-        </title>
+        </title> */}
         <desc id="network-desc">
           Four concentric circles with dots representing network members. Hover or focus on dots to
           see connections between members.
         </desc>
 
-        {/* Orbital paths (decorative circles) */}
+        {/* Orbital paths (decorative ellipses) */}
         <g className="orbits" aria-hidden="true">
           {ORBITS.map((orbit, index) => (
-            <circle
+            <ellipse
               key={`orbit-path-${index}`}
               className={styles.orbitPath}
               cx={CENTER_X}
               cy={CENTER_Y}
-              r={orbit.radius}
+              rx={orbit.radius}
+              ry={orbit.radius * ELLIPSE_RATIO}
             />
           ))}
         </g>
@@ -202,36 +254,30 @@ export function OrbitalNetwork() {
           </g>
         )}
 
-        {/* Animated dots grouped by orbit */}
-        {ORBITS.map((orbit, orbitIndex) => {
-          const orbitDots = allDots.filter((d) => d.orbitIndex === orbitIndex)
-          const orbitClass = styles[`orbit${orbitIndex}` as keyof typeof styles] || ''
+        {/* Animated dots */}
+        <g className="dots">
+          {allDots.map((dot) => {
+            const pos = getDotPosition(dot, currentTime)
 
-          return (
-            <g
-              key={`orbit-${orbitIndex}`}
-              className={`${styles.orbit} ${orbitClass} ${isPaused ? styles.paused : ''}`}
-            >
-              {orbitDots.map((dot) => (
-                <circle
-                  key={dot.id}
-                  className={styles.dot}
-                  cx={dot.x}
-                  cy={dot.y}
-                  r={DOT_RADIUS}
-                  onMouseEnter={() => handleDotEnter(dot)}
-                  onMouseLeave={handleDotLeave}
-                  onFocus={() => handleDotFocus(dot)}
-                  onBlur={handleDotBlur}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`Network member on tier ${orbitIndex + 1}`}
-                  aria-pressed={hoveredDotId === dot.id}
-                />
-              ))}
-            </g>
-          )
-        })}
+            return (
+              <circle
+                key={dot.id}
+                className={styles.dot}
+                cx={pos.x}
+                cy={pos.y}
+                r={DOT_RADIUS}
+                onMouseEnter={() => handleDotEnter(dot)}
+                onMouseLeave={handleDotLeave}
+                onFocus={() => handleDotFocus(dot)}
+                onBlur={handleDotBlur}
+                tabIndex={0}
+                role="button"
+                aria-label={`Network member on tier ${dot.orbitIndex + 1}`}
+                aria-pressed={hoveredDotId === dot.id}
+              />
+            )
+          })}
+        </g>
       </svg>
     </div>
   )

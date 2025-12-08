@@ -12,33 +12,6 @@
   max-height: 800px;
 }
 
-.orbit {
-  transform-origin: 400px 400px;
-  animation: orbit-rotate linear infinite;
-  will-change: transform;
-}
-
-.orbit.paused {
-  animation-play-state: paused;
-}
-
-/* Different speeds based on radius for constant linear velocity */
-.orbit0 {
-  animation-duration: 20s;
-}
-
-.orbit1 {
-  animation-duration: 36s;
-}
-
-.orbit2 {
-  animation-duration: 52s;
-}
-
-.orbit3 {
-  animation-duration: 68s;
-}
-
 .orbitPath {
   fill: none;
   stroke: hsl(var(--border));
@@ -76,15 +49,6 @@
   animation: fade-in-line 0.3s ease forwards;
 }
 
-@keyframes orbit-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes fade-in-line {
   from {
     opacity: 0;
@@ -98,10 +62,6 @@
 
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .orbit {
-    animation: none;
-  }
-
   .connection {
     animation: none;
     opacity: 0.6;
