@@ -1,0 +1,126 @@
+.container {
+  width: 100%;
+  max-width: 896px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.orbit {
+  transform-origin: 400px 400px;
+  animation: orbit-rotate linear infinite;
+  will-change: transform;
+}
+
+.orbit.paused {
+  animation-play-state: paused;
+}
+
+/* Different speeds based on radius for constant linear velocity */
+.orbit0 {
+  animation-duration: 20s;
+}
+
+.orbit1 {
+  animation-duration: 36s;
+}
+
+.orbit2 {
+  animation-duration: 52s;
+}
+
+.orbit3 {
+  animation-duration: 68s;
+}
+
+.orbitPath {
+  fill: none;
+  stroke: hsl(var(--border));
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.nucleus {
+  fill: hsl(var(--primary));
+  filter: drop-shadow(0 0 20px hsla(var(--hce-orange-glow), 0.4));
+}
+
+.dot {
+  fill: hsl(var(--primary));
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dot:hover,
+.dot:focus {
+  opacity: 1;
+  transform: scale(1.3);
+  outline: none;
+}
+
+.dot:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 4px;
+}
+
+.connection {
+  stroke: hsl(var(--primary));
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: fade-in-line 0.3s ease forwards;
+}
+
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in-line {
+  from {
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+  to {
+    opacity: 0.6;
+    stroke-width: 1.5;
+  }
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .container {
+    max-width: 672px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: 576px;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .orbit {
+    animation: none;
+  }
+
+  .connection {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .dot {
+    transition: none;
+  }
+}
