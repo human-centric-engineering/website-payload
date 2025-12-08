@@ -1,6 +1,5 @@
 import type { Metadata } from 'next/types'
 import React from 'react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { OrbitalNetwork } from '@/components/OrbitalNetwork/OrbitalNetwork'
 import PageClient from './page.client'

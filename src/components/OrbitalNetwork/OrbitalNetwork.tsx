@@ -114,7 +114,7 @@ export function OrbitalNetwork() {
   const animationStartTime = useRef<number>(Date.now())
   const pauseStartTime = useRef<number | null>(null)
   const totalPausedTime = useRef<number>(0)
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
 
   // Pre-calculate all dot positions
   const allDots = useMemo(() => {
