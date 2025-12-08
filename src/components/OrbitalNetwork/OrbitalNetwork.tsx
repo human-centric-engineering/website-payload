@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import type { Dot, Connection, OrbitConfig } from './types'
 import styles from './styles.module.css'
 
@@ -15,6 +15,7 @@ const ORBITS: OrbitConfig[] = [
 ]
 const DOT_RADIUS = 6
 const NUCLEUS_RADIUS = 12
+const ORBIT_DURATIONS = [20, 36, 52, 68] // seconds per orbit
 
 // Utility functions
 function shuffleArray<T>(array: T[]): T[] {
@@ -56,10 +57,40 @@ function selectConnectionTargets(hoveredDot: Dot, allDots: Dot[]): Dot[] {
   return shuffleArray(eligible).slice(0, count)
 }
 
+function getRotatedPosition(
+  dot: Dot,
+  orbitIndex: number,
+  startTime: number | null,
+  totalPausedTime: number
+): { x: number; y: number } {
+  if (startTime === null) {
+    return { x: dot.x, y: dot.y }
+  }
+
+  // Calculate elapsed time and current rotation angle (excluding paused time)
+  const now = Date.now()
+  const elapsed = (now - startTime - totalPausedTime) / 1000 // seconds
+  const duration = ORBIT_DURATIONS[orbitIndex]
+  const rotationAngle = ((elapsed % duration) / duration) * 360 // degrees
+
+  // Apply rotation transform around center point
+  const angleRad = (rotationAngle * Math.PI) / 180
+  const dx = dot.x - CENTER_X
+  const dy = dot.y - CENTER_Y
+
+  const rotatedX = CENTER_X + dx * Math.cos(angleRad) - dy * Math.sin(angleRad)
+  const rotatedY = CENTER_Y + dx * Math.sin(angleRad) + dy * Math.cos(angleRad)
+
+  return { x: rotatedX, y: rotatedY }
+}
+
 export function OrbitalNetwork() {
   const [hoveredDotId, setHoveredDotId] = useState<string | null>(null)
   const [connections, setConnections] = useState<Connection[]>([])
   const [isPaused, setIsPaused] = useState(false)
+  const animationStartTime = useRef<number>(Date.now())
+  const pauseStartTime = useRef<number | null>(null)
+  const totalPausedTime = useRef<number>(0)
 
   // Pre-calculate all dot positions
   const allDots = useMemo(() => {
@@ -68,21 +99,37 @@ export function OrbitalNetwork() {
 
   const handleDotEnter = useCallback(
     (dot: Dot) => {
+      // Record pause start time
+      pauseStartTime.current = Date.now()
+
       setHoveredDotId(dot.id)
       setIsPaused(true)
 
+      // Get current rotated position of the hovered dot (accounting for total paused time)
+      const hoveredPos = getRotatedPosition(dot, dot.orbitIndex, animationStartTime.current, totalPausedTime.current)
+
       // Select random dots to connect to
       const targets = selectConnectionTargets(dot, allDots)
-      const newConnections = targets.map((target) => ({
-        from: dot,
-        to: target,
-      }))
+      const newConnections = targets.map((target) => {
+        const targetPos = getRotatedPosition(target, target.orbitIndex, animationStartTime.current, totalPausedTime.current)
+        return {
+          from: { ...dot, x: hoveredPos.x, y: hoveredPos.y },
+          to: { ...target, x: targetPos.x, y: targetPos.y },
+        }
+      })
       setConnections(newConnections)
     },
     [allDots],
   )
 
   const handleDotLeave = useCallback(() => {
+    // Track how long we were paused
+    if (pauseStartTime.current !== null) {
+      const pauseDuration = Date.now() - pauseStartTime.current
+      totalPausedTime.current += pauseDuration
+      pauseStartTime.current = null
+    }
+
     setHoveredDotId(null)
     setIsPaused(false)
     setConnections([])
