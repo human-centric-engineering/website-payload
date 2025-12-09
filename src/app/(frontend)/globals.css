@@ -42,7 +42,7 @@
     --secondary: var(--hce-light-grey);
     --secondary-foreground: var(--hce-dark-grey);
 
-    --muted: var(--hce-light-grey);
+    --muted: var(--hce-white);
     --muted-foreground: 0 0% 40%;
 
     --accent: var(--hce-orange);
@@ -79,7 +79,8 @@
     --secondary: 0 0% 15%;
     --secondary-foreground: var(--hce-white);
 
-    --muted: 0 0% 15%;
+    /* --muted: 0 0% 15%; */
+    --muted: var(--hce-black);
     --muted-foreground: var(--hce-light-grey);
 
     --accent: var(--hce-orange);
