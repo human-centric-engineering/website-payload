@@ -2,7 +2,6 @@ import type { Metadata } from 'next/types'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { OrbitalNetwork } from '@/components/OrbitalNetwork/OrbitalNetwork'
-import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -10,7 +9,6 @@ export const revalidate = 600
 export default async function NetworkPage() {
   return (
     <div className="min-h-screen">
-      <PageClient />
       <div className="container py-24">
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
