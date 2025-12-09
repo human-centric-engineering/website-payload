@@ -10,7 +10,6 @@ import RichText from '@/components/RichText'
 import type { Project } from '@/payload-types'
 
 import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Media } from '@/components/Media'
 import { Badge } from '@/components/ui/badge'
@@ -53,8 +52,6 @@ export default async function Project({ params: paramsPromise }: Args) {
 
   return (
     <article className="pb-16">
-      <PageClient />
-
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
