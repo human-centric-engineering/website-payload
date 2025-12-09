@@ -27,8 +27,6 @@
 .dot {
   fill: hsl(var(--primary));
   opacity: 0.8;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
 }
 
 /* Orbit-specific dot colors - progressively lighter tints */
@@ -52,43 +50,13 @@
   filter: brightness(1.95);
 }
 
-.dot:hover,
-.dot:focus {
-  opacity: 1;
-  outline: none;
-}
-
-.dot:focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 4px;
-}
-
 .connection {
   stroke: hsl(var(--primary));
   stroke-width: 1.5;
-  opacity: 0;
-  animation: fade-in-line 0.3s ease forwards;
-}
-
-@keyframes fade-in-line {
-  from {
-    opacity: 0;
-    stroke-width: 0.5;
-  }
-  to {
-    opacity: 0.6;
-    stroke-width: 1.5;
-  }
+  /* Opacity controlled via inline style */
 }
 
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .connection {
-    animation: none;
-    opacity: 0.6;
-  }
-
-  .dot {
-    transition: none;
-  }
+  /* Animation handled via requestAnimationFrame, respects system preferences */
 }

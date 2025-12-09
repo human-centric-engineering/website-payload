@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react'
-import type { Dot, Connection, OrbitConfig } from './types'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
+import type { Dot, ConnectionSet, OrbitConfig } from './types'
 import styles from './styles.module.css'
 
 // Configuration
@@ -17,6 +17,13 @@ const DOT_RADIUS = 6
 const NUCLEUS_RADIUS = 24
 const ORBIT_DURATIONS = [20, 36, 52, 68] // seconds per orbit
 const ELLIPSE_RATIO = 0.6 // ry = rx * 0.6 for ~40° perspective
+
+// Automatic activation timing
+const ACTIVATION_INTERVAL = 1500 // ms between activations
+const FADE_IN_DURATION = 250 // ms
+const HOLD_DURATION = 700 // ms
+const FADE_OUT_DURATION = 1000 // ms
+const TOTAL_DURATION = FADE_IN_DURATION + HOLD_DURATION + FADE_OUT_DURATION // 1950ms
 
 // Utility functions
 function shuffleArray<T>(array: T[]): T[] {
@@ -75,46 +82,31 @@ function getDotPosition(dot: Dot, elapsedMs: number): { x: number; y: number } {
   }
 }
 
-function getRotatedPosition(
-  dot: Dot,
-  orbitIndex: number,
-  startTime: number | null,
-  totalPausedTime: number,
-): { x: number; y: number } {
-  if (startTime === null) {
-    return { x: dot.x, y: dot.y }
+function getConnectionOpacity(createdAt: number): number {
+  const age = Date.now() - createdAt
+
+  if (age < FADE_IN_DURATION) {
+    // Fade in
+    return (age / FADE_IN_DURATION) * 0.6
+  } else if (age < FADE_IN_DURATION + HOLD_DURATION) {
+    // Hold at full opacity
+    return 0.6
+  } else if (age < TOTAL_DURATION) {
+    // Fade out
+    const fadeOutProgress = (age - FADE_IN_DURATION - HOLD_DURATION) / FADE_OUT_DURATION
+    return 0.6 * (1 - fadeOutProgress)
   }
 
-  // Calculate elapsed time and current rotation angle (excluding paused time)
-  const now = Date.now()
-  const elapsed = (now - startTime - totalPausedTime) / 1000 // seconds
-  const duration = ORBIT_DURATIONS[orbitIndex]
-  const progress = (elapsed % duration) / duration // 0-1
-
-  // Add the dot's initial angle to the rotation progress
-  const currentAngle = dot.angle * (Math.PI / 180) + progress * 2 * Math.PI
-
-  const orbit = ORBITS[orbitIndex]
-  const rx = orbit.radius
-  const ry = orbit.radius * ELLIPSE_RATIO
-
-  // Calculate position on ellipse at current angle
-  const rotatedX = CENTER_X + rx * Math.cos(currentAngle)
-  const rotatedY = CENTER_Y + ry * Math.sin(currentAngle)
-
-  return { x: rotatedX, y: rotatedY }
+  return 0
 }
 
 export function OrbitalNetwork() {
-  const [hoveredDotId, setHoveredDotId] = useState<string | null>(null)
-  const [connections, setConnections] = useState<Connection[]>([])
-  const [isPaused, setIsPaused] = useState(false)
+  const [connectionSets, setConnectionSets] = useState<ConnectionSet[]>([])
   const [currentTime, setCurrentTime] = useState<number>(0)
   const [isMounted, setIsMounted] = useState(false)
   const animationStartTime = useRef<number>(Date.now())
-  const pauseStartTime = useRef<number | null>(null)
-  const totalPausedTime = useRef<number>(0)
   const animationFrameRef = useRef<number | undefined>(undefined)
+  const activationIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Pre-calculate all dot positions
   const allDots = useMemo(() => {
@@ -128,10 +120,10 @@ export function OrbitalNetwork() {
 
   // Animation loop
   useEffect(() => {
-    if (!isMounted || isPaused) return
+    if (!isMounted) return
 
     const animate = () => {
-      setCurrentTime(Date.now() - animationStartTime.current - totalPausedTime.current)
+      setCurrentTime(Date.now() - animationStartTime.current)
       animationFrameRef.current = requestAnimationFrame(animate)
     }
 
@@ -142,66 +134,59 @@ export function OrbitalNetwork() {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [isMounted, isPaused])
+  }, [isMounted])
 
-  const handleDotEnter = useCallback(
-    (dot: Dot) => {
-      // Record pause start time
-      pauseStartTime.current = Date.now()
+  // Automatic activation effect
+  useEffect(() => {
+    if (!isMounted) return
 
-      setHoveredDotId(dot.id)
-      setIsPaused(true)
+    const activateDot = () => {
+      // Calculate current elapsed time fresh (not from stale closure)
+      const elapsed = Date.now() - animationStartTime.current
 
-      // Get current rotated position of the hovered dot (accounting for total paused time)
-      const hoveredPos = getRotatedPosition(
-        dot,
-        dot.orbitIndex,
-        animationStartTime.current,
-        totalPausedTime.current,
-      )
+      // Randomly select a dot
+      const randomDot = allDots[Math.floor(Math.random() * allDots.length)]
 
-      // Select random dots to connect to
-      const targets = selectConnectionTargets(dot, allDots)
-      const newConnections = targets.map((target) => {
-        const targetPos = getRotatedPosition(
-          target,
-          target.orbitIndex,
-          animationStartTime.current,
-          totalPausedTime.current,
-        )
+      // Get current position of the selected dot
+      const fromPos = getDotPosition(randomDot, elapsed)
+
+      // Select random target dots
+      const targets = selectConnectionTargets(randomDot, allDots)
+
+      // Create connections with current positions
+      const connections = targets.map((target) => {
+        const toPos = getDotPosition(target, elapsed)
         return {
-          from: { ...dot, x: hoveredPos.x, y: hoveredPos.y },
-          to: { ...target, x: targetPos.x, y: targetPos.y },
+          from: { ...randomDot, x: fromPos.x, y: fromPos.y },
+          to: { ...target, x: toPos.x, y: toPos.y },
         }
       })
-      setConnections(newConnections)
-    },
-    [allDots],
-  )
 
-  const handleDotLeave = useCallback(() => {
-    // Track how long we were paused
-    if (pauseStartTime.current !== null) {
-      const pauseDuration = Date.now() - pauseStartTime.current
-      totalPausedTime.current += pauseDuration
-      pauseStartTime.current = null
+      // Add new connection set
+      const newSet: ConnectionSet = {
+        id: `conn-${Date.now()}-${Math.random()}`,
+        createdAt: Date.now(),
+        connections,
+      }
+
+      setConnectionSets((prev) => [...prev, newSet])
     }
 
-    setHoveredDotId(null)
-    setIsPaused(false)
-    setConnections([])
-  }, [])
+    // Start activation interval
+    activationIntervalRef.current = setInterval(activateDot, ACTIVATION_INTERVAL)
 
-  const handleDotFocus = useCallback(
-    (dot: Dot) => {
-      handleDotEnter(dot)
-    },
-    [handleDotEnter],
-  )
+    return () => {
+      if (activationIntervalRef.current) {
+        clearInterval(activationIntervalRef.current)
+      }
+    }
+  }, [isMounted, allDots])
 
-  const handleDotBlur = useCallback(() => {
-    handleDotLeave()
-  }, [handleDotLeave])
+  // Cleanup expired connection sets
+  useEffect(() => {
+    const now = Date.now()
+    setConnectionSets((prev) => prev.filter((set) => now - set.createdAt < TOTAL_DURATION))
+  }, [currentTime])
 
   return (
     <div className={styles.container}>
@@ -243,22 +228,31 @@ export function OrbitalNetwork() {
           aria-label="Network core"
         />
 
-        {/* Connection lines (rendered when hovering) */}
-        {connections.length > 0 && (
-          <g className="connections">
-            {connections.map((conn, index) => (
-              <line
-                key={`connection-${index}`}
-                className={styles.connection}
-                x1={conn.from.x}
-                y1={conn.from.y}
-                x2={conn.to.x}
-                y2={conn.to.y}
-                aria-hidden="true"
-              />
-            ))}
-          </g>
-        )}
+        {/* Connection lines */}
+        <g className="connections">
+          {connectionSets.map((set) => {
+            const opacity = getConnectionOpacity(set.createdAt)
+
+            return set.connections.map((conn, index) => {
+              // Calculate current positions of connected dots
+              const fromPos = getDotPosition(conn.from, currentTime)
+              const toPos = getDotPosition(conn.to, currentTime)
+
+              return (
+                <line
+                  key={`${set.id}-${index}`}
+                  className={styles.connection}
+                  x1={fromPos.x}
+                  y1={fromPos.y}
+                  x2={toPos.x}
+                  y2={toPos.y}
+                  style={{ opacity }}
+                  aria-hidden="true"
+                />
+              )
+            })
+          })}
+        </g>
 
         {/* Animated dots */}
         <g className="dots">
@@ -274,14 +268,6 @@ export function OrbitalNetwork() {
                 cx={pos.x}
                 cy={pos.y}
                 r={DOT_RADIUS}
-                onMouseEnter={() => handleDotEnter(dot)}
-                onMouseLeave={handleDotLeave}
-                onFocus={() => handleDotFocus(dot)}
-                onBlur={handleDotBlur}
-                tabIndex={0}
-                role="button"
-                aria-label={`Network member on tier ${dot.orbitIndex + 1}`}
-                aria-pressed={hoveredDotId === dot.id}
                 suppressHydrationWarning
               />
             )

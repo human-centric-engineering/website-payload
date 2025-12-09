@@ -11,6 +11,12 @@ export interface Connection {
   to: Dot
 }
 
+export interface ConnectionSet {
+  id: string
+  createdAt: number
+  connections: Connection[]
+}
+
 export interface OrbitConfig {
   radius: number
   dotCount: number
