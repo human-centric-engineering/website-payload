@@ -51,10 +51,8 @@
 }
 
 .connection {
-  stroke: hsl(var(--primary));
   stroke-width: 1.5;
-  filter: brightness(1.5);
-  /* Opacity controlled via inline style */
+  /* Color and opacity controlled via inline style */
 }
 
 /* Respect reduced motion preference */

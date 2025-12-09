@@ -19,11 +19,19 @@ const ORBIT_DURATIONS = [20, 36, 52, 68] // seconds per orbit
 const ELLIPSE_RATIO = 0.6 // ry = rx * 0.6 for ~40° perspective
 
 // Automatic activation timing
-const ACTIVATION_INTERVAL = 1500 // ms between activations
+const ACTIVATION_INTERVAL = 2000 // ms between activations
 const FADE_IN_DURATION = 450 // ms
-const HOLD_DURATION = 900 // ms
+const HOLD_DURATION = 1200 // ms
 const FADE_OUT_DURATION = 1000 // ms
 const TOTAL_DURATION = FADE_IN_DURATION + HOLD_DURATION + FADE_OUT_DURATION // 1950ms
+
+// Connection line colors
+const CONNECTION_COLORS = [
+  'hsl(25, 95%, 53%)', // Current orange (primary color)
+  'hsl(25, 85%, 65%)', // Pale orange
+  'hsl(0, 0%, 100%)', // White
+  'hsl(0, 0%, 70%)', // Grey
+]
 
 // Utility functions
 function shuffleArray<T>(array: T[]): T[] {
@@ -153,12 +161,14 @@ export function OrbitalNetwork() {
       // Select random target dots
       const targets = selectConnectionTargets(randomDot, allDots)
 
-      // Create connections with current positions
+      // Create connections with current positions and random colors
       const connections = targets.map((target) => {
         const toPos = getDotPosition(target, elapsed)
+        const randomColor = CONNECTION_COLORS[Math.floor(Math.random() * CONNECTION_COLORS.length)]
         return {
           from: { ...randomDot, x: fromPos.x, y: fromPos.y },
           to: { ...target, x: toPos.x, y: toPos.y },
+          color: randomColor,
         }
       })
 
@@ -246,7 +256,7 @@ export function OrbitalNetwork() {
                   y1={fromPos.y}
                   x2={toPos.x}
                   y2={toPos.y}
-                  style={{ opacity }}
+                  style={{ opacity, stroke: conn.color }}
                   aria-hidden="true"
                 />
               )

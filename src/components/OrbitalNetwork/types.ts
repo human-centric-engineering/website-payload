@@ -9,6 +9,7 @@ export interface Dot {
 export interface Connection {
   from: Dot
   to: Dot
+  color: string
 }
 
 export interface ConnectionSet {
