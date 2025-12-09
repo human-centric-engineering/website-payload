@@ -20,8 +20,8 @@ const ELLIPSE_RATIO = 0.6 // ry = rx * 0.6 for ~40° perspective
 
 // Automatic activation timing
 const ACTIVATION_INTERVAL = 1500 // ms between activations
-const FADE_IN_DURATION = 250 // ms
-const HOLD_DURATION = 700 // ms
+const FADE_IN_DURATION = 450 // ms
+const HOLD_DURATION = 900 // ms
 const FADE_OUT_DURATION = 1000 // ms
 const TOTAL_DURATION = FADE_IN_DURATION + HOLD_DURATION + FADE_OUT_DURATION // 1950ms
 
