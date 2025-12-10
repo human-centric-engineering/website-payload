@@ -3,10 +3,10 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'HCE Studio - Redefining entrepreneurship in the AI age through human-centric venture creation.',
+  description: 'HCE Studio - Craftsmanship at pace, where human ingenuity meets AI capability',
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/hce-web-social-default.png`,
     },
   ],
   siteName: 'HCE Studio',
