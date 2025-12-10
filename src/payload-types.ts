@@ -219,6 +219,35 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  networkContent?: {
+    headline: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    ctaSection: {
+      title: string;
+      description: string;
+      linkedInLinks?:
+        | {
+            name: string;
+            url: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
   meta?: {
     title?: string | null;
     /**
@@ -1254,6 +1283,25 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
       };
   whitepaperContent?: T;
+  networkContent?:
+    | T
+    | {
+        headline?: T;
+        description?: T;
+        ctaSection?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              linkedInLinks?:
+                | T
+                | {
+                    name?: T;
+                    url?: T;
+                    id?: T;
+                  };
+            };
+      };
   meta?:
     | T
     | {
