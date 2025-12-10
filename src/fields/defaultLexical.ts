@@ -1,5 +1,6 @@
 import type { TextFieldSingleValidation } from 'payload'
 import {
+  BlockquoteFeature,
   BoldFeature,
   HeadingFeature,
   IndentFeature,
@@ -19,6 +20,7 @@ export const defaultLexical = lexicalEditor({
     HeadingFeature({
       enabledHeadingSizes: ['h2', 'h3', 'h4'],
     }),
+    BlockquoteFeature(),
     UnorderedListFeature(),
     OrderedListFeature(),
     IndentFeature(),
