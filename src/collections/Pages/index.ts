@@ -13,6 +13,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { whitepaperLexical } from '@/fields/whitepaperLexical'
+import { defaultLexical } from '@/fields/defaultLexical'
 
 import {
   MetaDescriptionField,
@@ -76,7 +77,7 @@ export const Pages: CollectionConfig<'pages'> = {
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
               admin: {
-                condition: (data) => data?.slug !== 'whitepaper',
+                condition: (data) => data?.slug !== 'whitepaper' && data?.slug !== 'network',
                 initCollapsed: true,
               },
             },
@@ -88,6 +89,62 @@ export const Pages: CollectionConfig<'pages'> = {
                 condition: (data) => data?.slug === 'whitepaper',
               },
               label: 'Whitepaper Content',
+            },
+            {
+              name: 'networkContent',
+              type: 'group',
+              admin: {
+                condition: (data) => data?.slug === 'network',
+              },
+              fields: [
+                {
+                  name: 'headline',
+                  type: 'text',
+                  required: true,
+                  defaultValue: 'Building Our Network',
+                },
+                {
+                  name: 'description',
+                  type: 'richText',
+                  editor: defaultLexical,
+                  required: true,
+                },
+                {
+                  name: 'ctaSection',
+                  type: 'group',
+                  fields: [
+                    {
+                      name: 'title',
+                      type: 'text',
+                      required: true,
+                      defaultValue: 'Connect With Us',
+                    },
+                    {
+                      name: 'description',
+                      type: 'textarea',
+                      required: true,
+                    },
+                    {
+                      name: 'linkedInLinks',
+                      type: 'array',
+                      minRows: 1,
+                      maxRows: 4,
+                      fields: [
+                        {
+                          name: 'name',
+                          type: 'text',
+                          required: true,
+                        },
+                        {
+                          name: 'url',
+                          type: 'text',
+                          required: true,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
           label: 'Content',
