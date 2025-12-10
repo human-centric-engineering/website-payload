@@ -40,6 +40,10 @@ export default async function WhitepaperPage() {
 
       <RenderHero {...hero} />
 
+      <div className="container mt-8">
+        <DownloadPDFButton className="justify-start" />
+      </div>
+
       <div className="container mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main content - 8 columns */}

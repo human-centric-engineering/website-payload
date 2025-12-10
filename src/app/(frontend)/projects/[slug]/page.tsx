@@ -58,35 +58,39 @@ export default async function Project({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Hero Section - Two Column Layout */}
-      <div className="container pt-16 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className="order-2 lg:order-1">
-            <div className="flex items-center gap-3 mb-6">
-              <Badge variant="default">{getProjectTypeLabel(project.projectType)}</Badge>
-              {project.projectStatus && (
-                <Badge variant="secondary">{getProjectStatusLabel(project.projectStatus)}</Badge>
+      <section className="relative bg-gradient-to-br from-primary/10 via-muted to-muted border-b-2 border-border overflow-hidden">
+        {/* Decorative gradient blob */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+        <div className="container pt-16 pb-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Content */}
+            <div className="order-2 lg:order-1">
+              <div className="flex items-center gap-3 mb-6">
+                <Badge variant="default">{getProjectTypeLabel(project.projectType)}</Badge>
+                {project.projectStatus && (
+                  <Badge variant="secondary">{getProjectStatusLabel(project.projectStatus)}</Badge>
+                )}
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{project.title}</h1>
+              {project.excerpt && (
+                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+                  {project.excerpt}
+                </p>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{project.title}</h1>
-            {project.excerpt && (
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                {project.excerpt}
-              </p>
+
+            {/* Right Column - Image */}
+            {project.heroImage && typeof project.heroImage === 'object' && (
+              <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden order-1 lg:order-2 shadow-lg">
+                <Media resource={project.heroImage} imgClassName="object-cover" fill priority />
+              </div>
             )}
           </div>
-
-          {/* Right Column - Image */}
-          {project.heroImage && typeof project.heroImage === 'object' && (
-            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden order-1 lg:order-2">
-              <Media resource={project.heroImage} imgClassName="object-cover" fill priority />
-            </div>
-          )}
         </div>
-      </div>
+      </section>
 
       {/* Content - using same pattern as Posts */}
-      <div className="flex flex-col items-center gap-4 pt-8">
+      <div className="flex flex-col items-center gap-4 pt-12 pb-8">
         <div className="container">
           <RichText className="max-w-[48rem] mx-auto" data={project.content} enableGutter={false} />
         </div>
