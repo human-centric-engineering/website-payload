@@ -144,6 +144,7 @@ export const aboutPage: (args: AboutArgs) => RequiredDataFromCollectionSlug<'pag
           {
             icon: '',
             media: heroImage.id,
+            imageFit: 'contain',
             size: 'oneThird',
           },
         ],

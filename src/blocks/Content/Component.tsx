@@ -43,7 +43,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, icon, link, media, richText, size } = col
+            const { enableLink, icon, imageFit = 'cover', link, media, richText, size } = col
             const isFullWidth = size === 'full'
             const isTwoThirds = size === 'twoThirds'
             const isOneThird = size === 'oneThird'
@@ -56,6 +56,12 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
             // Check if this is an image-only column (oneThird with media but no richText)
             const isImageColumn = isOneThird && media && !richText
 
+            // Determine image styling based on imageFit option
+            const useContain = imageFit === 'contain'
+            const imageContainerClass = useContain ? 'rounded-xl overflow-hidden' : 'h-full rounded-xl overflow-hidden'
+            const imageClass = useContain ? 'w-full' : 'w-full h-full object-cover'
+            const imgClass = useContain ? 'w-full h-auto object-contain' : 'w-full h-full object-cover'
+
             return (
               <div
                 className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
@@ -67,12 +73,12 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 <ScrollReveal delay={isFullWidth || isTwoThirds ? 0 : index * 100}>
                   {isImageColumn ? (
                     // Image-only column
-                    <div className="h-full rounded-xl overflow-hidden">
+                    <div className={imageContainerClass}>
                       {media && typeof media === 'object' && (
                         <Media
                           resource={media}
-                          className="w-full h-full object-cover"
-                          imgClassName="w-full h-full object-cover"
+                          className={imageClass}
+                          imgClassName={imgClass}
                         />
                       )}
                     </div>

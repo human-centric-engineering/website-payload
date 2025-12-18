@@ -166,30 +166,29 @@ export const Projects: CollectionConfig<'projects'> = {
             },
             {
               name: 'links',
-              type: 'group',
+              type: 'array',
+              label: 'Project Links',
               fields: [
                 {
-                  name: 'website',
+                  name: 'label',
                   type: 'text',
+                  required: true,
                   admin: {
-                    description: 'Live website URL',
+                    description: 'Button text (e.g., "View Demo", "Download PDF", "Visit Website")',
                   },
                 },
                 {
-                  name: 'caseStudy',
+                  name: 'url',
                   type: 'text',
+                  required: true,
                   admin: {
-                    description: 'Case study or blog post URL',
-                  },
-                },
-                {
-                  name: 'repository',
-                  type: 'text',
-                  admin: {
-                    description: 'GitHub or repository URL (if applicable)',
+                    description: 'Link URL',
                   },
                 },
               ],
+              admin: {
+                description: 'Add custom links for this project',
+              },
             },
           ],
           label: 'Content',

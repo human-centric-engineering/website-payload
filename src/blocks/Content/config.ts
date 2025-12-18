@@ -49,6 +49,25 @@ const columnFields: Field[] = [
     },
   },
   {
+    name: 'imageFit',
+    type: 'select',
+    defaultValue: 'cover',
+    admin: {
+      description: 'How the image should fit in the column',
+      condition: (data, siblingData) => Boolean(siblingData?.media),
+    },
+    options: [
+      {
+        label: 'Cover (crop to fill)',
+        value: 'cover',
+      },
+      {
+        label: 'Contain (preserve aspect ratio)',
+        value: 'contain',
+      },
+    ],
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({

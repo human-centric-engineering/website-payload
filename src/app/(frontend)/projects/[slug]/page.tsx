@@ -116,41 +116,26 @@ export default async function Project({ params: paramsPromise }: Args) {
       )}
 
       {/* Links */}
-      {project.links && (
+      {project.links && project.links.length > 0 && (
         <div className="container mt-12">
           <div className="max-w-[48rem] mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Project Links</h2>
             <div className="flex flex-wrap gap-4">
-              {project.links.website && (
+              {project.links.map((link, index) => (
                 <a
-                  href={project.links.website}
+                  key={link.id || index}
+                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+                  className={
+                    index === 0
+                      ? "px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+                      : "px-6 py-3 rounded-lg border border-border font-medium hover:bg-muted transition-colors"
+                  }
                 >
-                  Visit Website
+                  {link.label}
                 </a>
-              )}
-              {project.links.caseStudy && (
-                <a
-                  href={project.links.caseStudy}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-lg border border-border font-medium hover:bg-muted transition-colors"
-                >
-                  Read Case Study
-                </a>
-              )}
-              {project.links.repository && (
-                <a
-                  href={project.links.repository}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-lg border border-border font-medium hover:bg-muted transition-colors"
-                >
-                  View Repository
-                </a>
-              )}
+              ))}
             </div>
           </div>
         </div>
