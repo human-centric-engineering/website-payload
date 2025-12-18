@@ -552,6 +552,10 @@ export interface ContentBlock {
          * Optional image for this column
          */
         media?: (number | null) | Media;
+        /**
+         * How the image should fit in the column
+         */
+        imageFit?: ('cover' | 'contain') | null;
         richText?: {
           root: {
             type: string;
@@ -1354,6 +1358,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         size?: T;
         icon?: T;
         media?: T;
+        imageFit?: T;
         richText?: T;
         enableLink?: T;
         link?:
