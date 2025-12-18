@@ -880,20 +880,22 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
-  links?: {
-    /**
-     * Live website URL
-     */
-    website?: string | null;
-    /**
-     * Case study or blog post URL
-     */
-    caseStudy?: string | null;
-    /**
-     * GitHub or repository URL (if applicable)
-     */
-    repository?: string | null;
-  };
+  /**
+   * Add custom links for this project
+   */
+  links?:
+    | {
+        /**
+         * Button text (e.g., "View Demo", "Download PDF", "Visit Website")
+         */
+        label: string;
+        /**
+         * Link URL
+         */
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     /**
@@ -1455,9 +1457,9 @@ export interface ProjectsSelect<T extends boolean = true> {
   links?:
     | T
     | {
-        website?: T;
-        caseStudy?: T;
-        repository?: T;
+        label?: T;
+        url?: T;
+        id?: T;
       };
   meta?:
     | T
